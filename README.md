@@ -101,16 +101,11 @@ NKTg AI is built around several core concepts:
 
 🌐 Official Website
 
-```bash
 **Website:** https://nktg.org
-```
+
 🌐 NKTg AI Help Center
 
-```bash
 **Website:** https://help.nktg.org
-
-```
-
 
 
 ---
