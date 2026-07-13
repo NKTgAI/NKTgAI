@@ -99,11 +99,16 @@ NKTg AI is built around several core concepts:
 
 ## Running the Project
 
-
-
 🌐 Official Website
+
 ```bash
-https://nktg.org/
+**Website:** https://nktg.org
+```
+🌐 NKTg AI Help Center
+
+```bash
+**Website:** https://help.nktg.org
+
 ```
 
 
