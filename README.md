@@ -5,104 +5,115 @@
 </p>
 
 <p align="center">
-<b>NKTg AI Documentation & Help Center</b><br>
-A static documentation website for the NKTg AI Language Decoding System.
+<b>Language Decoding System</b><br>
+Measure semantic structure. Extract Core Content. Support better decisions.
 </p>
 
 ---
 
-## About
+## Overview
 
-NKTg AI is a Language Decoding System designed to identify the **Core Content** of a text by measuring semantic energy using deterministic algorithms.
+NKTg AI is a deterministic Language Decoding System that measures the semantic structure of text to identify its **Core Content**.
 
-Unlike traditional AI summarization systems, NKTg AI focuses on semantic decoding rather than text generation.
+Unlike traditional AI summarization systems, NKTg AI does not generate new information or rewrite documents. Instead, it analyzes the internal semantic structure of a text and extracts the sentence that carries the highest semantic energy.
 
-The documentation website contains explanations of:
-
-- Core Content
-- Semantic Energy
-- AMP Text
-- DAMP Text
-- STABLE Text
-- 55% Threshold
-- Algorithms
-- Applications
-- Privacy
-- Plans
-- Account Management
-- Contact Information
+The system is designed for decision support across business, legal, finance, healthcare, journalism, education, scientific research, government, auditing, and project management.
 
 ---
 
-## Features
+## Key Features
 
-- Static HTML website
-- No backend required
-- Lightweight
-- Fast loading
-- Easy deployment
-- SEO friendly
-- Mobile responsive
-- GitHub Pages compatible
+* Deterministic semantic analysis
+* Core Content extraction
+* AMP / DAMP / STABLE text classification
+* Semantic Energy measurement
+* 55% Threshold evaluation
+* Decision-support oriented analysis
+* Privacy-first architecture
+* Browser-based execution
+* Lightweight and fast
+* No backend required
+
+---
+
+## Core Concepts
+
+NKTg AI is built around several core concepts:
+
+* Core Content
+* Semantic Energy
+* AMP Text
+* DAMP Text
+* STABLE Text
+* 55% Threshold
+* Extraction
+* Addition
+* Decision Support
 
 ---
 
 ## Project Structure
 
-```
+```text
 .
-├── index.html
-├── logo_NKTgAI.png
-├── what-is-nktg-ai.html
-├── core-content-example.html
-├── amp-text-definition.html
-├── damp-text-definition.html
-├── stable-text-definition.html
-├── threshold-55-usage.html
-├── nktg-ai-algorithm.html
-├── nktg-ai-extraction.html
-├── nktg-ai-addition.html
-├── nktg-ai-applications.html
-├── nktg-ai-business-management.html
-├── nktg-ai-government-administration.html
-├── nktg-ai-legal-application.html
-├── nktg-ai-healthcare-application.html
-├── nktg-ai-education-application.html
-├── nktg-ai-journalism-application.html
-├── nktg-ai-research-application.html
-├── nktg-ai-project-management.html
-├── nktg-ai-audit-compliance.html
-├── nktg-ai-credit-application.html
-├── nktg-ai-account.html
-├── nktg-ai-profile-management.html
-├── nktg-ai-language.html
-├── nktg-ai-plan.html
-├── nktg-ai-plus.html
-├── nktg-ai-pro.html
-├── nktg-ai-privacy.html
-├── nktg-ai-contact.html
+├── index.html                                 # NKTg AI
+├── logo_NKTgAI.png                            # NKTg AI Logo
+│
+├── what-is-nktg-ai.html                       # What is NKTg AI?
+├── core-content-example.html                  # What is Core Content? A worked example
+├── amp-text-definition.html                   # AMP Text Definition
+├── damp-text-definition.html                  # DAMP Text Definition
+├── stable-text-definition.html                # STABLE Text Definition
+├── threshold-55-usage.html                    # How to use NKTg AI's 55% threshold
+│
+├── nktg-ai-extraction.html                    # How to use the Extraction feature
+├── nktg-ai-addition.html                      # How to use the Addition feature
+├── nktg-ai-algorithm.html                     # What is NKTg AI's algorithm built on?
+│
+├── nktg-ai-applications.html                  # NKTg AI for Decision Support
+├── nktg-ai-business-management.html           # Using NKTg AI in Business Management
+├── nktg-ai-legal-application.html             # Using NKTg AI in Legal Work
+├── nktg-ai-government-administration.html     # Using NKTg AI in Government & Public Administration
+├── nktg-ai-credit-application.html            # Using NKTg AI in Credit Analysis
+├── nktg-ai-healthcare-application.html        # Using NKTg AI in Healthcare
+├── nktg-ai-journalism-application.html        # Using NKTg AI in Journalism
+├── nktg-ai-research-application.html          # Using NKTg AI in Research
+├── nktg-ai-education-application.html         # Using NKTg AI in Education
+├── nktg-ai-audit-compliance.html              # Using NKTg AI in Audit & Compliance
+├── nktg-ai-project-management.html            # Using NKTg AI in Project Management
+│
+├── nktg-ai-profile-management.html            # Managing Your Profile
+├── nktg-ai-account.html                       # Managing Your Account
+├── nktg-ai-plan.html                          # Managing Your Plan
+├── nktg-ai-plus.html                          # NKTg AI Plus
+├── nktg-ai-pro.html                           # NKTg AI Pro
+├── nktg-ai-language.html                      # Changing Interface Language
+├── nktg-ai-contact.html                       # Contact Support
+├── nktg-ai-limitations.html                   # Limitations to Keep in Mind
+├── nktg-ai-privacy.html                       # Privacy & Data Handling
+│
 └── README.md
 ```
 
 ---
 
-## Running Locally
+## Running the Project
 
 Simply open:
 
-```
+```text
 index.html
 ```
 
 or start a local web server.
 
-Python:
+Python
 
 ```bash
 python -m http.server
 ```
 
-Node.js:
+Node.js
 
 ```bash
 npx serve
@@ -110,44 +121,39 @@ npx serve
 
 ---
 
-## Deployment
+## Applications
 
-This project can be deployed to:
+NKTg AI can be used in many domains, including:
 
-- GitHub Pages
-- GitLab Pages
-- Cloudflare Pages
-- Netlify
-- Vercel
-- Any static web hosting
-
-No server-side configuration is required.
-
----
-
-## Technology
-
-- HTML5
-- CSS3
-- JavaScript
-- Responsive Design
+* Business Management
+* Legal Work
+* Government & Public Administration
+* Credit Analysis
+* Healthcare
+* Journalism
+* Scientific Research
+* Education
+* Audit & Compliance
+* Project Management
 
 ---
 
-## Documentation
+## Privacy
 
-The website includes documentation for:
+NKTg AI is designed with a privacy-first approach.
 
-- What is NKTg AI
-- Core Content
-- Semantic Energy
-- AMP
-- DAMP
-- STABLE
-- 55% Threshold
-- Applications
-- Privacy
-- User Guide
+The application runs entirely inside the user's browser. User documents are processed locally and are not transmitted to external servers by the application itself.
+
+---
+
+## Browser Compatibility
+
+Compatible with modern browsers including:
+
+* Google Chrome
+* Microsoft Edge
+* Mozilla Firefox
+* Safari
 
 ---
 
