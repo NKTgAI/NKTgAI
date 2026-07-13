@@ -99,25 +99,14 @@ NKTg AI is built around several core concepts:
 
 ## Running the Project
 
-Simply open:
 
-```text
-index.html
-```
 
-or start a local web server.
-
-Python
-
+🌐 Official Website
 ```bash
-python -m http.server
+https://nktg.org/
 ```
 
-Node.js
 
-```bash
-npx serve
-```
 
 ---
 
