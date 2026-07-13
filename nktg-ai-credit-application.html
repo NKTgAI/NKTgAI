@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>How do credit officers use NKTg AI?</title>
+    <link rel="icon" type="image/png" href="logo_NKTgAI.png">
+    <style>
+
+        :root { --nktg-dark: #2c3e50; --nktg-link: #007bff; }
+        * { box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            margin: 0;
+            padding: 20px;
+            background: #f9f9f9;
+        }
+        .page {
+            max-width: 800px;
+            margin: 0 auto;
+            background: #fff;
+            padding: 28px 32px;
+            border-radius: 12px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.06);
+        }
+        .back-link {
+            display: inline-block;
+            margin-bottom: 20px;
+            text-decoration: none;
+            color: var(--nktg-link);
+            font-weight: bold;
+            font-size: 15px;
+        }
+        h1 { color: var(--nktg-dark); font-size: 26px; margin-top: 0; line-height: 1.3; }
+        h2 { color: var(--nktg-link); font-size: 20px; margin-top: 30px; border-bottom: 1px solid #eee; padding-bottom: 6px; line-height: 1.3; }
+        h3 { color: var(--nktg-dark); font-size: 17px; margin-top: 22px; }
+        p, li { font-size: 16px; }
+        ul, ol { margin-left: 20px; padding-left: 4px; }
+        pre {
+            background: #f4f4f4;
+            padding: 14px;
+            border-radius: 6px;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+            overflow-x: auto;
+            font-size: 14px;
+        }
+        table { width: 100%; border-collapse: collapse; margin: 16px 0; display: block; overflow-x: auto; white-space: nowrap; }
+        th, td { border: 1px solid #ddd; padding: 10px 12px; text-align: left; }
+        th { background: #f4f4f4; }
+        .example, .quote-box { background: #f9f9f9; padding: 14px 16px; border-left: 4px solid var(--nktg-dark); margin: 16px 0; font-style: normal; }
+        .divider { margin: 22px 0; border-top: 1px solid #eee; }
+
+        @media (max-width: 600px) {
+            body { padding: 10px; }
+            .page { padding: 18px 16px; border-radius: 8px; }
+            h1 { font-size: 21px; }
+            h2 { font-size: 17px; margin-top: 24px; }
+            h3 { font-size: 16px; }
+            p, li { font-size: 15px; }
+            table, th, td { font-size: 13px; }
+            th, td { padding: 8px; }
+            pre { font-size: 13px; padding: 10px; }
+        }
+    </style>
+</head>
+<body>
+<div class="nktg-lang-switcher" id="nktgLangSwitcher">
+    <button type="button" class="nktg-lang-btn" onclick="document.getElementById('nktgLangMenu').classList.toggle('open')">
+        <span>🌐</span><span id="nktgLangLabel">Language</span>
+    </button>
+    <div class="nktg-lang-menu" id="nktgLangMenu"></div>
+</div>
+<style>
+.nktg-lang-switcher{position:fixed;top:14px;right:14px;z-index:1000;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;}
+.nktg-lang-btn{display:flex;align-items:center;gap:6px;background:#fff;border:1px solid #ddd;border-radius:20px;padding:7px 14px;font-size:14px;color:#333;cursor:pointer;box-shadow:0 2px 6px rgba(0,0,0,0.08);}
+.nktg-lang-btn:hover{background:#f5f5f5;}
+.nktg-lang-menu{display:none;position:absolute;top:calc(100% + 6px);right:0;background:#fff;border:1px solid #eee;border-radius:10px;box-shadow:0 4px 16px rgba(0,0,0,0.12);min-width:160px;overflow:hidden;}
+.nktg-lang-menu.open{display:block;}
+.nktg-lang-menu a{display:block;padding:10px 16px;font-size:14px;color:#333;text-decoration:none;}
+.nktg-lang-menu a:hover{background:#f0f7ff;}
+.nktg-lang-menu a.active{color:#007bff;font-weight:bold;}
+@media (max-width:600px){.nktg-lang-switcher{top:8px;right:8px;}.nktg-lang-btn{padding:6px 10px;font-size:13px;}}
+</style>
+<script>
+(function(){
+    var LANGS = [
+        {code:'vi', label:'Tiếng Việt'},
+        {code:'en', label:'English'},
+        {code:'fr', label:'Français'},
+        {code:'de', label:'Deutsch'},
+        {code:'es', label:'Español'},
+        {code:'zh', label:'中文'},
+        {code:'ja', label:'日本語'},
+        {code:'ru', label:'Русский'}
+    ];
+    var parts = location.pathname.split('/').filter(Boolean);
+    var filename = 'index.html';
+    var curLang = parts[0] || 'vi';
+    if (parts.length > 0 && parts[parts.length-1].indexOf('.html') !== -1) {
+        filename = parts[parts.length-1];
+    }
+    var known = LANGS.map(function(l){ return l.code; });
+    if (known.indexOf(curLang) === -1) curLang = 'vi';
+
+    var labelEl = document.getElementById('nktgLangLabel');
+    var menuEl = document.getElementById('nktgLangMenu');
+    var curObj = LANGS.filter(function(l){ return l.code === curLang; })[0] || LANGS[0];
+    if (labelEl) labelEl.textContent = curObj.label;
+
+    var html = '';
+    LANGS.forEach(function(l){
+        var cls = (l.code === curLang) ? 'active' : '';
+        html += '<a class="' + cls + '" href="/' + l.code + '/' + filename + '">' + l.label + '</a>';
+    });
+    if (menuEl) menuEl.innerHTML = html;
+
+    document.addEventListener('click', function(e){
+        var switcher = document.getElementById('nktgLangSwitcher');
+        if (switcher && !switcher.contains(e.target)) {
+            menuEl.classList.remove('open');
+        }
+    });
+})();
+</script>
+    <div class="page">
+        <a href="index.html" class="back-link">← Back to home</a>
+<h1>How do credit officers use NKTg AI?</h1>
+
+  <h2>Quickly spot loan conditions, risks, obligations, and commitments in contracts and reports</h2>
+  <p>
+    A credit officer may need to read dozens of files a day, including credit contracts, financial statements, appraisal reports, business plans, collateral files, meeting minutes, and other related documents.
+  </p>
+  <p>NKTg AI helps users decide <strong>which direction to read a document from first</strong>, instead of trying to read everything from the start.</p>
+
+  <div class="divider"></div>
+
+  <h2>Scenario 1: Reading a credit contract</h2>
+  <p>After analysis, NKTg AI shows <strong>AMP = 71%</strong>, indicating the contract focuses on enforceable clauses.</p>
+  <p>Read the <strong>Core Content</strong> first, which usually contains:</p>
+  <ul>
+    <li>Disbursement conditions</li>
+    <li>Customer obligations</li>
+    <li>Mandatory commitments</li>
+    <li>Consequences of breach</li>
+  </ul>
+
+  <div class="divider"></div>
+
+  <h2>Scenario 2: Reading a credit appraisal report</h2>
+  <p>Analysis result: <strong>DAMP = 68%</strong>, showing the report focuses on analysis of:</p>
+  <ul>
+    <li>Repayment capacity</li>
+    <li>Cash flow</li>
+    <li>Financial condition</li>
+    <li>Market risk</li>
+    <li>Legal risk</li>
+    <li>Assumptions used in the appraisal</li>
+  </ul>
+  <p>In this case, focus on reading the risk assessment and conditions sections instead of looking for a single Core Content sentence.</p>
+
+  <div class="divider"></div>
+
+  <h2>Scenario 3: Reading a credit issuance procedure</h2>
+  <p>Analysis result: <strong>AMP = 49%</strong>, <strong>DAMP = 47%</strong> → <strong>STABLE</strong> state.</p>
+  <p>This indicates the document is a procedural guide with no dominant Core Content. Users should look up the specific chapter or step relevant to the task at hand.</p>
+
+  <div class="divider"></div>
+
+  <h2>How to use NKTg AI in daily work</h2>
+  <p>Every time you open a document, follow three steps:</p>
+  <ul>
+    <li><strong>Step 1:</strong> Observe the AMP and DAMP scores.</li>
+    <li><strong>Step 2:</strong> Choose the right reading approach:
+      <ul>
+        <li>AMP &gt; 55% → Read the Core Content first.</li>
+        <li>DAMP &gt; 55% → Read the analysis, conditions, and risk warning sections.</li>
+        <li>AMP ≈ DAMP (STABLE) → Read chapter by chapter or step by step.</li>
+      </ul>
+    </li>
+    <li><strong>Step 3:</strong> Decide whether a deep read of the full document is needed.</li>
+  </ul>
+
+  <div class="divider"></div>
+
+  <h2>Value of NKTg AI for credit officers</h2>
+  <p>NKTg AI doesn't replace an appraisal officer, but helps you access the right information from the start:</p>
+  <ul>
+    <li>In contracts: identify loan conditions, obligations, and commitments.</li>
+    <li>In appraisal reports: quickly spot the analysis and risk content.</li>
+    <li>In business procedures: recognize it's a procedural guide and look things up section by section.</li>
+  </ul>
+
+  <div class="divider"></div>
+
+  <h2>Conclusion</h2>
+  <p>
+    In Finance and Banking, effectiveness doesn't just come from reading faster — it comes from <strong>reading correctly</strong>.
+    NKTg AI helps credit officers understand a document's structure before diving into the details, shortening appraisal time and focusing on the conditions, risks, obligations, and commitments that directly affect a financial decision.
+  </p>
+    </div>
+</body>
+</html>

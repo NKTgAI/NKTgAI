@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Privacy and How NKTg AI Handles Data</title>
+    <link rel="icon" type="image/png" href="logo_NKTgAI.png">
+    <style>
+
+        :root { --nktg-dark: #2c3e50; --nktg-link: #007bff; }
+        * { box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            margin: 0;
+            padding: 20px;
+            background: #f9f9f9;
+        }
+        .page {
+            max-width: 800px;
+            margin: 0 auto;
+            background: #fff;
+            padding: 28px 32px;
+            border-radius: 12px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.06);
+        }
+        .back-link {
+            display: inline-block;
+            margin-bottom: 20px;
+            text-decoration: none;
+            color: var(--nktg-link);
+            font-weight: bold;
+            font-size: 15px;
+        }
+        h1 { color: var(--nktg-dark); font-size: 26px; margin-top: 0; line-height: 1.3; }
+        h2 { color: var(--nktg-link); font-size: 20px; margin-top: 30px; border-bottom: 1px solid #eee; padding-bottom: 6px; line-height: 1.3; }
+        h3 { color: var(--nktg-dark); font-size: 17px; margin-top: 22px; }
+        p, li { font-size: 16px; }
+        ul, ol { margin-left: 20px; padding-left: 4px; }
+        pre {
+            background: #f4f4f4;
+            padding: 14px;
+            border-radius: 6px;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+            overflow-x: auto;
+            font-size: 14px;
+        }
+        table { width: 100%; border-collapse: collapse; margin: 16px 0; display: block; overflow-x: auto; white-space: nowrap; }
+        th, td { border: 1px solid #ddd; padding: 10px 12px; text-align: left; }
+        th { background: #f4f4f4; }
+        .example, .quote-box { background: #f9f9f9; padding: 14px 16px; border-left: 4px solid var(--nktg-dark); margin: 16px 0; font-style: normal; }
+        .divider { margin: 22px 0; border-top: 1px solid #eee; }
+
+        @media (max-width: 600px) {
+            body { padding: 10px; }
+            .page { padding: 18px 16px; border-radius: 8px; }
+            h1 { font-size: 21px; }
+            h2 { font-size: 17px; margin-top: 24px; }
+            h3 { font-size: 16px; }
+            p, li { font-size: 15px; }
+            table, th, td { font-size: 13px; }
+            th, td { padding: 8px; }
+            pre { font-size: 13px; padding: 10px; }
+        }
+    </style>
+</head>
+<body>
+<div class="nktg-lang-switcher" id="nktgLangSwitcher">
+    <button type="button" class="nktg-lang-btn" onclick="document.getElementById('nktgLangMenu').classList.toggle('open')">
+        <span>🌐</span><span id="nktgLangLabel">Language</span>
+    </button>
+    <div class="nktg-lang-menu" id="nktgLangMenu"></div>
+</div>
+<style>
+.nktg-lang-switcher{position:fixed;top:14px;right:14px;z-index:1000;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;}
+.nktg-lang-btn{display:flex;align-items:center;gap:6px;background:#fff;border:1px solid #ddd;border-radius:20px;padding:7px 14px;font-size:14px;color:#333;cursor:pointer;box-shadow:0 2px 6px rgba(0,0,0,0.08);}
+.nktg-lang-btn:hover{background:#f5f5f5;}
+.nktg-lang-menu{display:none;position:absolute;top:calc(100% + 6px);right:0;background:#fff;border:1px solid #eee;border-radius:10px;box-shadow:0 4px 16px rgba(0,0,0,0.12);min-width:160px;overflow:hidden;}
+.nktg-lang-menu.open{display:block;}
+.nktg-lang-menu a{display:block;padding:10px 16px;font-size:14px;color:#333;text-decoration:none;}
+.nktg-lang-menu a:hover{background:#f0f7ff;}
+.nktg-lang-menu a.active{color:#007bff;font-weight:bold;}
+@media (max-width:600px){.nktg-lang-switcher{top:8px;right:8px;}.nktg-lang-btn{padding:6px 10px;font-size:13px;}}
+</style>
+<script>
+(function(){
+    var LANGS = [
+        {code:'vi', label:'Tiếng Việt'},
+        {code:'en', label:'English'},
+        {code:'fr', label:'Français'},
+        {code:'de', label:'Deutsch'},
+        {code:'es', label:'Español'},
+        {code:'zh', label:'中文'},
+        {code:'ja', label:'日本語'},
+        {code:'ru', label:'Русский'}
+    ];
+    var parts = location.pathname.split('/').filter(Boolean);
+    var filename = 'index.html';
+    var curLang = parts[0] || 'vi';
+    if (parts.length > 0 && parts[parts.length-1].indexOf('.html') !== -1) {
+        filename = parts[parts.length-1];
+    }
+    var known = LANGS.map(function(l){ return l.code; });
+    if (known.indexOf(curLang) === -1) curLang = 'vi';
+
+    var labelEl = document.getElementById('nktgLangLabel');
+    var menuEl = document.getElementById('nktgLangMenu');
+    var curObj = LANGS.filter(function(l){ return l.code === curLang; })[0] || LANGS[0];
+    if (labelEl) labelEl.textContent = curObj.label;
+
+    var html = '';
+    LANGS.forEach(function(l){
+        var cls = (l.code === curLang) ? 'active' : '';
+        html += '<a class="' + cls + '" href="/' + l.code + '/' + filename + '">' + l.label + '</a>';
+    });
+    if (menuEl) menuEl.innerHTML = html;
+
+    document.addEventListener('click', function(e){
+        var switcher = document.getElementById('nktgLangSwitcher');
+        if (switcher && !switcher.contains(e.target)) {
+            menuEl.classList.remove('open');
+        }
+    });
+})();
+</script>
+    <div class="page">
+        <a href="index.html" class="back-link">← Back to home</a>
+<h1>Privacy and How NKTg AI Handles Data</h1>
+  <p>
+    NKTg AI is designed with a privacy-first principle. The entire text analysis process runs directly on the user's device via WebAssembly, with no need to send content to a server for processing.
+  </p>
+
+  <div class="divider"></div>
+
+  <h2>How does NKTg AI process text?</h2>
+  <p>When you type text or upload a document, NKTg AI processes the entire content right in your browser using WebAssembly technology. The text is analyzed directly on your device without being transmitted to a server.</p>
+
+  <div class="divider"></div>
+
+  <h2>Is my text sent to a server?</h2>
+  <p><strong>No.</strong> Your text content is not sent to a server for analysis. The entire process happens locally on your device.</p>
+
+  <div class="divider"></div>
+
+  <h2>Does NKTg AI use cloud AI?</h2>
+  <p><strong>No.</strong> NKTg AI does not use cloud AI services to analyze text. Document content is not sent to any AI system or third-party processing service.</p>
+
+  <div class="divider"></div>
+
+  <h2>Is my text stored in a remote database?</h2>
+  <p><strong>No.</strong> NKTg AI does not store your text content on a server or in a remote database.</p>
+
+  <div class="divider"></div>
+
+  <h2>Where is history stored?</h2>
+  <p>Usage history is stored in your browser's <strong>localStorage</strong>. This means history stays entirely on your device and is not synced to a server.</p>
+  <p>If you clear your browser data, reinstall your browser, or switch to a different device, the history will no longer be there.</p>
+
+  <div class="divider"></div>
+
+  <h2>Can I use NKTg AI without an Internet connection?</h2>
+  <p><strong>Yes.</strong> Once the NKTg AI app has loaded in your browser, you can continue analyzing text even after disconnecting from the Internet.</p>
+  <p>Note: If you reload the page or visit NKTg AI for the first time on a new device, your browser will need an Internet connection to load the app.</p>
+
+  <div class="divider"></div>
+
+  <h2>Why does NKTg AI use this architecture?</h2>
+  <p>The local-processing architecture provides several benefits:</p>
+  <ul>
+    <li>Text never leaves the user's device</li>
+    <li>Content is not sent to a server for analysis</li>
+    <li>No cloud AI is used</li>
+    <li>Text is not stored in a remote database</li>
+    <li>History is stored locally on the device</li>
+    <li>Analysis can continue without an Internet connection once the app has loaded</li>
+  </ul>
+
+  <div class="divider"></div>
+
+  <h2>Summary</h2>
+  <ul>
+    <li>The entire analysis process runs directly in the browser via WebAssembly</li>
+    <li>Text is not sent to a server for processing</li>
+    <li>No cloud AI is used</li>
+    <li>Text is not stored in a remote database</li>
+    <li>History is stored in localStorage on the user's device</li>
+    <li>You can continue analyzing text even when your device loses its Internet connection (as long as the app was loaded before)</li>
+  </ul>
+  <p><em>That last point is worth emphasizing, since it's both technically accurate and a distinct advantage of NKTg AI compared to many AI services that depend on a server to process every request.</em></p>
+    </div>
+</body>
+</html>

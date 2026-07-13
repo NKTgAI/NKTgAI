@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Using NKTg AI in Business Management</title>
+    <link rel="icon" type="image/png" href="logo_NKTgAI.png">
+    <style>
+
+        :root { --nktg-dark: #2c3e50; --nktg-link: #007bff; }
+        * { box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            margin: 0;
+            padding: 20px;
+            background: #f9f9f9;
+        }
+        .page {
+            max-width: 800px;
+            margin: 0 auto;
+            background: #fff;
+            padding: 28px 32px;
+            border-radius: 12px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.06);
+        }
+        .back-link {
+            display: inline-block;
+            margin-bottom: 20px;
+            text-decoration: none;
+            color: var(--nktg-link);
+            font-weight: bold;
+            font-size: 15px;
+        }
+        h1 { color: var(--nktg-dark); font-size: 26px; margin-top: 0; line-height: 1.3; }
+        h2 { color: var(--nktg-link); font-size: 20px; margin-top: 30px; border-bottom: 1px solid #eee; padding-bottom: 6px; line-height: 1.3; }
+        h3 { color: var(--nktg-dark); font-size: 17px; margin-top: 22px; }
+        p, li { font-size: 16px; }
+        ul, ol { margin-left: 20px; padding-left: 4px; }
+        pre {
+            background: #f4f4f4;
+            padding: 14px;
+            border-radius: 6px;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+            overflow-x: auto;
+            font-size: 14px;
+        }
+        table { width: 100%; border-collapse: collapse; margin: 16px 0; display: block; overflow-x: auto; white-space: nowrap; }
+        th, td { border: 1px solid #ddd; padding: 10px 12px; text-align: left; }
+        th { background: #f4f4f4; }
+        .example, .quote-box { background: #f9f9f9; padding: 14px 16px; border-left: 4px solid var(--nktg-dark); margin: 16px 0; font-style: normal; }
+        .divider { margin: 22px 0; border-top: 1px solid #eee; }
+
+        @media (max-width: 600px) {
+            body { padding: 10px; }
+            .page { padding: 18px 16px; border-radius: 8px; }
+            h1 { font-size: 21px; }
+            h2 { font-size: 17px; margin-top: 24px; }
+            h3 { font-size: 16px; }
+            p, li { font-size: 15px; }
+            table, th, td { font-size: 13px; }
+            th, td { padding: 8px; }
+            pre { font-size: 13px; padding: 10px; }
+        }
+    </style>
+</head>
+<body>
+<div class="nktg-lang-switcher" id="nktgLangSwitcher">
+    <button type="button" class="nktg-lang-btn" onclick="document.getElementById('nktgLangMenu').classList.toggle('open')">
+        <span>🌐</span><span id="nktgLangLabel">Language</span>
+    </button>
+    <div class="nktg-lang-menu" id="nktgLangMenu"></div>
+</div>
+<style>
+.nktg-lang-switcher{position:fixed;top:14px;right:14px;z-index:1000;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;}
+.nktg-lang-btn{display:flex;align-items:center;gap:6px;background:#fff;border:1px solid #ddd;border-radius:20px;padding:7px 14px;font-size:14px;color:#333;cursor:pointer;box-shadow:0 2px 6px rgba(0,0,0,0.08);}
+.nktg-lang-btn:hover{background:#f5f5f5;}
+.nktg-lang-menu{display:none;position:absolute;top:calc(100% + 6px);right:0;background:#fff;border:1px solid #eee;border-radius:10px;box-shadow:0 4px 16px rgba(0,0,0,0.12);min-width:160px;overflow:hidden;}
+.nktg-lang-menu.open{display:block;}
+.nktg-lang-menu a{display:block;padding:10px 16px;font-size:14px;color:#333;text-decoration:none;}
+.nktg-lang-menu a:hover{background:#f0f7ff;}
+.nktg-lang-menu a.active{color:#007bff;font-weight:bold;}
+@media (max-width:600px){.nktg-lang-switcher{top:8px;right:8px;}.nktg-lang-btn{padding:6px 10px;font-size:13px;}}
+</style>
+<script>
+(function(){
+    var LANGS = [
+        {code:'vi', label:'Tiếng Việt'},
+        {code:'en', label:'English'},
+        {code:'fr', label:'Français'},
+        {code:'de', label:'Deutsch'},
+        {code:'es', label:'Español'},
+        {code:'zh', label:'中文'},
+        {code:'ja', label:'日本語'},
+        {code:'ru', label:'Русский'}
+    ];
+    var parts = location.pathname.split('/').filter(Boolean);
+    var filename = 'index.html';
+    var curLang = parts[0] || 'vi';
+    if (parts.length > 0 && parts[parts.length-1].indexOf('.html') !== -1) {
+        filename = parts[parts.length-1];
+    }
+    var known = LANGS.map(function(l){ return l.code; });
+    if (known.indexOf(curLang) === -1) curLang = 'vi';
+
+    var labelEl = document.getElementById('nktgLangLabel');
+    var menuEl = document.getElementById('nktgLangMenu');
+    var curObj = LANGS.filter(function(l){ return l.code === curLang; })[0] || LANGS[0];
+    if (labelEl) labelEl.textContent = curObj.label;
+
+    var html = '';
+    LANGS.forEach(function(l){
+        var cls = (l.code === curLang) ? 'active' : '';
+        html += '<a class="' + cls + '" href="/' + l.code + '/' + filename + '">' + l.label + '</a>';
+    });
+    if (menuEl) menuEl.innerHTML = html;
+
+    document.addEventListener('click', function(e){
+        var switcher = document.getElementById('nktgLangSwitcher');
+        if (switcher && !switcher.contains(e.target)) {
+            menuEl.classList.remove('open');
+        }
+    });
+})();
+</script>
+    <div class="page">
+        <a href="index.html" class="back-link">← Back to home</a>
+<h1>Using NKTg AI in Business Management</h1>
+  <p><strong>Instantly find decisions, KPIs, responsible parties, and deadlines in a report</strong></p>
+  <p>
+    For a manager, time isn't spent reading a report — it's spent finding enough information to make a decision.
+    A 20- or 50-page report often contains a lot of content: background, analysis, figures, evaluation, and explanation.
+    Yet only a handful of sentences actually determine the business's direction.
+  </p>
+  <p>NKTg AI is designed to solve exactly this problem.</p>
+
+  <div class="divider"></div>
+
+  <h2>Step 1: Check AMP and DAMP before reading</h2>
+  <p>Right after analyzing a document, NKTg AI returns AMP and DAMP scores.</p>
+  <p><strong>If AMP &gt; 55%</strong></p>
+  <ul>
+    <li>decisions</li>
+    <li>task assignments</li>
+    <li>KPIs</li>
+    <li>implementation plans</li>
+    <li>expected outcomes</li>
+  </ul>
+  <p>This is the type of report where leadership should read the Core Content first.</p>
+
+  <p><strong>If DAMP &gt; 55%</strong></p>
+  <ul>
+    <li>analysis</li>
+    <li>conditions</li>
+    <li>risks</li>
+    <li>exceptions</li>
+    <li>explanations</li>
+  </ul>
+  <p>These are usually evaluation or research reports. The reader needs to review the analysis sections before deciding.</p>
+
+  <div class="divider"></div>
+
+  <h2>Step 2: Read the Core Content</h2>
+  <p>When AMP exceeds 55%, NKTg AI identifies the Core Content.</p>
+  <div class="example">
+    <p><strong>Example:</strong></p>
+    <p>"The sales director is assigned a 25% revenue growth target and must finalize agreements with three strategic partners before September 30."</p>
+    <p>From this single sentence, a manager already knows:</p>
+    <ul>
+      <li>Who is primarily responsible</li>
+      <li>What KPI must be reached</li>
+      <li>The work that must be completed</li>
+      <li>The deadline</li>
+    </ul>
+  </div>
+
+  <div class="divider"></div>
+
+  <h2>Step 3: Decide whether to read the full report</h2>
+  <p>
+    After reading the Core Content, a manager can quickly determine the next course of action.
+    If the Core Content fully answers the relevant questions, you can grasp the executive intent first, then dig into related sections only if you need to verify details.
+  </p>
+  <p>
+    If the Core Content doesn't provide enough information, or the document has high DAMP, continue reading the analysis sections to evaluate context, risks, and conditions affecting the decision.
+  </p>
+
+  <div class="divider"></div>
+
+  <h2>Suitable document types</h2>
+  <ul>
+    <li>Weekly, monthly, and quarterly reports</li>
+    <li>Business plans</li>
+    <li>Executive meeting minutes</li>
+    <li>Project reports</li>
+    <li>KPI reports</li>
+    <li>Task assignment documents</li>
+    <li>Implementation plans</li>
+    <li>Progress reports</li>
+  </ul>
+
+  <div class="divider"></div>
+
+  <h2>Value for managers</h2>
+  <p>NKTg AI helps managers quickly identify:</p>
+  <ul>
+    <li>The document's most important decision</li>
+    <li>The responsible party</li>
+    <li>The KPI or target to reach</li>
+    <li>The action that must be carried out</li>
+    <li>The deadline</li>
+    <li>Whether the document leans toward action (AMP) or analysis (DAMP)</li>
+  </ul>
+
+  <div class="divider"></div>
+
+  <h2>Conclusion</h2>
+  <p>
+    In business management, NKTg AI's value isn't reading on your behalf — it's decoding the language structure to quickly identify a report's decision-critical information.
+  </p>
+  <p>
+    When AMP exceeds the 55% threshold, a manager can prioritize reading the Core Content to immediately grasp the decision, KPI, responsible party, and deadline.
+    When DAMP exceeds 55%, the reader knows the document leans toward analysis and should review the full context before deciding.
+  </p>
+  <p>
+    That's how NKTg AI helps managers read the right focal points, prioritize the right documents, and make faster decisions grounded in the text's own original information.
+  </p>
+    </div>
+</body>
+</html>

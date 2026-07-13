@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>How do project managers use NKTg AI?</title>
+    <link rel="icon" type="image/png" href="logo_NKTgAI.png">
+    <style>
+
+        :root { --nktg-dark: #2c3e50; --nktg-link: #007bff; }
+        * { box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            margin: 0;
+            padding: 20px;
+            background: #f9f9f9;
+        }
+        .page {
+            max-width: 800px;
+            margin: 0 auto;
+            background: #fff;
+            padding: 28px 32px;
+            border-radius: 12px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.06);
+        }
+        .back-link {
+            display: inline-block;
+            margin-bottom: 20px;
+            text-decoration: none;
+            color: var(--nktg-link);
+            font-weight: bold;
+            font-size: 15px;
+        }
+        h1 { color: var(--nktg-dark); font-size: 26px; margin-top: 0; line-height: 1.3; }
+        h2 { color: var(--nktg-link); font-size: 20px; margin-top: 30px; border-bottom: 1px solid #eee; padding-bottom: 6px; line-height: 1.3; }
+        h3 { color: var(--nktg-dark); font-size: 17px; margin-top: 22px; }
+        p, li { font-size: 16px; }
+        ul, ol { margin-left: 20px; padding-left: 4px; }
+        pre {
+            background: #f4f4f4;
+            padding: 14px;
+            border-radius: 6px;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+            overflow-x: auto;
+            font-size: 14px;
+        }
+        table { width: 100%; border-collapse: collapse; margin: 16px 0; display: block; overflow-x: auto; white-space: nowrap; }
+        th, td { border: 1px solid #ddd; padding: 10px 12px; text-align: left; }
+        th { background: #f4f4f4; }
+        .example, .quote-box { background: #f9f9f9; padding: 14px 16px; border-left: 4px solid var(--nktg-dark); margin: 16px 0; font-style: normal; }
+        .divider { margin: 22px 0; border-top: 1px solid #eee; }
+
+        @media (max-width: 600px) {
+            body { padding: 10px; }
+            .page { padding: 18px 16px; border-radius: 8px; }
+            h1 { font-size: 21px; }
+            h2 { font-size: 17px; margin-top: 24px; }
+            h3 { font-size: 16px; }
+            p, li { font-size: 15px; }
+            table, th, td { font-size: 13px; }
+            th, td { padding: 8px; }
+            pre { font-size: 13px; padding: 10px; }
+        }
+    </style>
+</head>
+<body>
+<div class="nktg-lang-switcher" id="nktgLangSwitcher">
+    <button type="button" class="nktg-lang-btn" onclick="document.getElementById('nktgLangMenu').classList.toggle('open')">
+        <span>🌐</span><span id="nktgLangLabel">Language</span>
+    </button>
+    <div class="nktg-lang-menu" id="nktgLangMenu"></div>
+</div>
+<style>
+.nktg-lang-switcher{position:fixed;top:14px;right:14px;z-index:1000;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;}
+.nktg-lang-btn{display:flex;align-items:center;gap:6px;background:#fff;border:1px solid #ddd;border-radius:20px;padding:7px 14px;font-size:14px;color:#333;cursor:pointer;box-shadow:0 2px 6px rgba(0,0,0,0.08);}
+.nktg-lang-btn:hover{background:#f5f5f5;}
+.nktg-lang-menu{display:none;position:absolute;top:calc(100% + 6px);right:0;background:#fff;border:1px solid #eee;border-radius:10px;box-shadow:0 4px 16px rgba(0,0,0,0.12);min-width:160px;overflow:hidden;}
+.nktg-lang-menu.open{display:block;}
+.nktg-lang-menu a{display:block;padding:10px 16px;font-size:14px;color:#333;text-decoration:none;}
+.nktg-lang-menu a:hover{background:#f0f7ff;}
+.nktg-lang-menu a.active{color:#007bff;font-weight:bold;}
+@media (max-width:600px){.nktg-lang-switcher{top:8px;right:8px;}.nktg-lang-btn{padding:6px 10px;font-size:13px;}}
+</style>
+<script>
+(function(){
+    var LANGS = [
+        {code:'vi', label:'Tiếng Việt'},
+        {code:'en', label:'English'},
+        {code:'fr', label:'Français'},
+        {code:'de', label:'Deutsch'},
+        {code:'es', label:'Español'},
+        {code:'zh', label:'中文'},
+        {code:'ja', label:'日本語'},
+        {code:'ru', label:'Русский'}
+    ];
+    var parts = location.pathname.split('/').filter(Boolean);
+    var filename = 'index.html';
+    var curLang = parts[0] || 'vi';
+    if (parts.length > 0 && parts[parts.length-1].indexOf('.html') !== -1) {
+        filename = parts[parts.length-1];
+    }
+    var known = LANGS.map(function(l){ return l.code; });
+    if (known.indexOf(curLang) === -1) curLang = 'vi';
+
+    var labelEl = document.getElementById('nktgLangLabel');
+    var menuEl = document.getElementById('nktgLangMenu');
+    var curObj = LANGS.filter(function(l){ return l.code === curLang; })[0] || LANGS[0];
+    if (labelEl) labelEl.textContent = curObj.label;
+
+    var html = '';
+    LANGS.forEach(function(l){
+        var cls = (l.code === curLang) ? 'active' : '';
+        html += '<a class="' + cls + '" href="/' + l.code + '/' + filename + '">' + l.label + '</a>';
+    });
+    if (menuEl) menuEl.innerHTML = html;
+
+    document.addEventListener('click', function(e){
+        var switcher = document.getElementById('nktgLangSwitcher');
+        if (switcher && !switcher.contains(e.target)) {
+            menuEl.classList.remove('open');
+        }
+    });
+})();
+</script>
+    <div class="page">
+        <a href="index.html" class="back-link">← Back to home</a>
+<h1>How do project managers use NKTg AI?</h1>
+
+  <h2>Quickly identify tasks, owners, targets, and timelines in meeting minutes or plans</h2>
+  <p>
+    A project can generate hundreds of documents over its lifecycle: meeting minutes, implementation plans, progress reports, task lists, change requests, and summary reports.
+    NKTg AI helps project managers quickly identify this important information before reading the full document.
+  </p>
+
+  <div class="divider"></div>
+
+  <h2>Scenario 1: Reading project meeting minutes</h2>
+  <p>Analysis result: <strong>AMP = 78%</strong>, showing the meeting reached many concrete decisions and actions.</p>
+  <p>Read the <strong>Core Content</strong> first, which usually identifies simultaneously:</p>
+  <ul>
+    <li>The work that must be done</li>
+    <li>The responsible person</li>
+    <li>The target to reach</li>
+    <li>The completion timeline</li>
+  </ul>
+  <blockquote>
+    "The development team will complete the Beta version by August 15; the technical lead is responsible for acceptance testing and weekly progress reporting."
+  </blockquote>
+
+  <div class="divider"></div>
+
+  <h2>Scenario 2: Reading a progress or risk report</h2>
+  <p>Analysis result: <strong>DAMP = 66%</strong>, showing the report focuses on:</p>
+  <ul>
+    <li>Causes of delay</li>
+    <li>Risks</li>
+    <li>Difficulties</li>
+    <li>Affecting conditions</li>
+    <li>Dependencies between tasks</li>
+    <li>Proposed solutions</li>
+  </ul>
+  <p>The project manager should prioritize the risks, plan-altering conditions, and warnings that need early handling.</p>
+
+  <div class="divider"></div>
+
+  <h2>Scenario 3: Reading a project management process</h2>
+  <p>Analysis result: <strong>AMP = 50%</strong>, <strong>DAMP = 49%</strong> → <strong>STABLE</strong> state.</p>
+  <p>The document standardizes a workflow, with no dominant Core Content. Users should read step by step through the process.</p>
+
+  <div class="divider"></div>
+
+  <h2>How to use NKTg AI in project management</h2>
+  <ul>
+    <li><strong>Step 1:</strong> Observe the AMP and DAMP scores.</li>
+    <li><strong>Step 2:</strong> Choose the right reading approach:
+      <ul>
+        <li>AMP &gt; 55% → Read the Core Content to identify the task, owner, target, and timeline.</li>
+        <li>DAMP &gt; 55% → Focus on risks, causes, conditions, and dependencies between tasks.</li>
+        <li>AMP ≈ DAMP (STABLE) → Read process by process or phase by phase.</li>
+      </ul>
+    </li>
+    <li><strong>Step 3:</strong> Build a tracking list: priority tasks, owners, timelines, risks, and topics to discuss.</li>
+  </ul>
+
+  <div class="divider"></div>
+
+  <h2>Value of NKTg AI for project managers</h2>
+  <p>NKTg AI doesn't replace the project manager, but helps you quickly access the most important information in the original document:</p>
+  <ul>
+    <li>In meeting minutes and plans: identify tasks, owners, targets, and deadlines.</li>
+    <li>In progress and risk reports: identify causes of delay, affecting conditions, and warnings.</li>
+    <li>In management processes: recognize the STABLE state and reference step by step.</li>
+  </ul>
+
+  <div class="divider"></div>
+
+  <h2>Conclusion</h2>
+  <p>
+    In project management, success depends on the ability to <strong>identify the right work and the right time to act</strong>.
+    NKTg AI helps project managers recognize a document's structure from the start using the AMP, DAMP, and STABLE metrics, helping them choose the right approach.
+  </p>
+    </div>
+</body>
+</html>

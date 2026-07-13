@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <base href="/en/">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NKTg AI Help Center</title>
+    <link rel="icon" type="image/png" href="logo_NKTgAI.png">
+    <style>
+        * { box-sizing: border-box; }
+        body { 
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; 
+            padding: 50px 20px; 
+            background: #f9f9f9; 
+            margin: 0;
+        }
+        .container { 
+            max-width: 1000px; 
+            margin: 0 auto; 
+            background: white; 
+            padding: 40px; 
+            border-radius: 12px; 
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1); 
+        }
+        .header-section { text-align: center; margin-bottom: 30px; }
+        .logo { width: 100px; height: 100px; margin-bottom: 10px; }
+        .title { font-size: 28px; color: #333; margin: 0; }
+        .search-box { 
+            width: 100%; 
+            padding: 12px; 
+            margin-bottom: 25px; 
+            border: 1px solid #ddd; 
+            border-radius: 8px; 
+            box-sizing: border-box; 
+            font-size: 16px;
+        }
+        .article { 
+            padding: 15px; 
+            border-bottom: 1px solid #eee; 
+            cursor: pointer; 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center; 
+            gap: 12px;
+        }
+        .article:hover { background: #f0f7ff; }
+        .arrow { color: #888; font-weight: bold; font-size: 20px; flex-shrink: 0; }
+
+        @media (max-width: 600px) {
+            body { padding: 20px 10px; }
+            .container { padding: 20px 16px; border-radius: 8px; }
+            .logo { width: 72px; height: 72px; }
+            .title { font-size: 21px; }
+            .article { padding: 12px 4px; font-size: 15px; }
+        }
+    </style>
+</head>
+<body>
+<div class="nktg-lang-switcher" id="nktgLangSwitcher">
+    <button type="button" class="nktg-lang-btn" onclick="document.getElementById('nktgLangMenu').classList.toggle('open')">
+        <span>🌐</span><span id="nktgLangLabel">Language</span>
+    </button>
+    <div class="nktg-lang-menu" id="nktgLangMenu"></div>
+</div>
+<style>
+.nktg-lang-switcher{position:fixed;top:14px;right:14px;z-index:1000;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;}
+.nktg-lang-btn{display:flex;align-items:center;gap:6px;background:#fff;border:1px solid #ddd;border-radius:20px;padding:7px 14px;font-size:14px;color:#333;cursor:pointer;box-shadow:0 2px 6px rgba(0,0,0,0.08);}
+.nktg-lang-btn:hover{background:#f5f5f5;}
+.nktg-lang-menu{display:none;position:absolute;top:calc(100% + 6px);right:0;background:#fff;border:1px solid #eee;border-radius:10px;box-shadow:0 4px 16px rgba(0,0,0,0.12);min-width:160px;overflow:hidden;}
+.nktg-lang-menu.open{display:block;}
+.nktg-lang-menu a{display:block;padding:10px 16px;font-size:14px;color:#333;text-decoration:none;}
+.nktg-lang-menu a:hover{background:#f0f7ff;}
+.nktg-lang-menu a.active{color:#007bff;font-weight:bold;}
+@media (max-width:600px){.nktg-lang-switcher{top:8px;right:8px;}.nktg-lang-btn{padding:6px 10px;font-size:13px;}}
+</style>
+<script>
+(function(){
+    var LANGS = [
+        {code:'vi', label:'Tiếng Việt'},
+        {code:'en', label:'English'},
+        {code:'fr', label:'Français'},
+        {code:'de', label:'Deutsch'},
+        {code:'es', label:'Español'},
+        {code:'zh', label:'中文'},
+        {code:'ja', label:'日本語'},
+        {code:'ru', label:'Русский'}
+    ];
+    var parts = location.pathname.split('/').filter(Boolean);
+    var filename = 'index.html';
+    var curLang = parts[0] || 'vi';
+    if (parts.length > 0 && parts[parts.length-1].indexOf('.html') !== -1) {
+        filename = parts[parts.length-1];
+    }
+    var known = LANGS.map(function(l){ return l.code; });
+    if (known.indexOf(curLang) === -1) curLang = 'vi';
+
+    var labelEl = document.getElementById('nktgLangLabel');
+    var menuEl = document.getElementById('nktgLangMenu');
+    var curObj = LANGS.filter(function(l){ return l.code === curLang; })[0] || LANGS[0];
+    if (labelEl) labelEl.textContent = curObj.label;
+
+    var html = '';
+    LANGS.forEach(function(l){
+        var cls = (l.code === curLang) ? 'active' : '';
+        html += '<a class="' + cls + '" href="/' + l.code + '/' + filename + '">' + l.label + '</a>';
+    });
+    if (menuEl) menuEl.innerHTML = html;
+
+    document.addEventListener('click', function(e){
+        var switcher = document.getElementById('nktgLangSwitcher');
+        if (switcher && !switcher.contains(e.target)) {
+            menuEl.classList.remove('open');
+        }
+    });
+})();
+</script>
+    <div class="container">
+        <div class="header-section">
+            <img src="logo_NKTgAI.png" class="logo" alt="NKTg AI">
+            <h1 class="title">NKTg AI Help Center</h1>
+        </div>
+
+        <input type="text" class="search-box" placeholder="Search articles...">
+        
+        <div class="article" onclick="location.href='what-is-nktg-ai.html'">
+            <span>What is NKTg AI?</span> <span class="arrow">></span>
+        </div>
+        <div class="article" onclick="location.href='core-content-example.html'">
+            <span>What is Core Content? A worked example</span> <span class="arrow">></span>
+        </div>
+        <div class="article" onclick="location.href='amp-text-definition.html'">
+            <span>AMP Text Definition</span> <span class="arrow">></span>
+        </div>
+        <div class="article" onclick="location.href='damp-text-definition.html'">
+            <span>DAMP Text Definition</span> <span class="arrow">></span>
+        </div>
+        <div class="article" onclick="location.href='stable-text-definition.html'">
+            <span>STABLE Text Definition</span> <span class="arrow">></span>
+        </div>
+        <div class="article" onclick="location.href='threshold-55-usage.html'">
+            <span>How to use NKTg AI's 55% threshold</span> <span class="arrow">></span>
+        </div>
+        <div class="article" onclick="location.href='nktg-ai-extraction.html'">
+            <span>How to use the Extraction feature</span> <span class="arrow">></span>
+        </div>
+        <div class="article" onclick="location.href='nktg-ai-addition.html'">
+            <span>How to use the Addition feature</span> <span class="arrow">></span>
+        </div>
+        <div class="article" onclick="location.href='nktg-ai-applications.html'">
+            <span>NKTg AI is a language-structure measurement tool for decision support</span> <span class="arrow">></span>
+        </div>
+        <div class="article" onclick="location.href='nktg-ai-business-management.html'">
+            <span>Using NKTg AI in Business Management</span> <span class="arrow">></span>
+        </div>
+        <div class="article" onclick="location.href='nktg-ai-legal-application.html'">
+            <span>Using NKTg AI in Legal work</span> <span class="arrow">></span>
+        </div>
+        <div class="article" onclick="location.href='nktg-ai-government-administration.html'">
+            <span>Using NKTg AI in Government & Public Administration</span> <span class="arrow">></span>
+        </div>
+        <div class="article" onclick="location.href='nktg-ai-credit-application.html'">
+            <span>How do credit officers use NKTg AI?</span> <span class="arrow">></span>
+        </div>
+        <div class="article" onclick="location.href='nktg-ai-healthcare-application.html'">
+            <span>How do doctors and healthcare staff use NKTg AI?</span> <span class="arrow">></span>
+        </div>
+        <div class="article" onclick="location.href='nktg-ai-journalism-application.html'">
+            <span>How do journalists and editors use NKTg AI?</span> <span class="arrow">></span>
+        </div>
+        <div class="article" onclick="location.href='nktg-ai-research-application.html'">
+            <span>How do researchers use NKTg AI?</span> <span class="arrow">></span>
+        </div>
+        <div class="article" onclick="location.href='nktg-ai-education-application.html'">
+            <span>How do students use NKTg AI?</span> <span class="arrow">></span>
+        </div>
+        <div class="article" onclick="location.href='nktg-ai-audit-compliance.html'">
+            <span>How do auditors and compliance officers use NKTg AI?</span> <span class="arrow">></span>
+        </div>
+        <div class="article" onclick="location.href='nktg-ai-project-management.html'">
+            <span>How do project managers use NKTg AI?</span> <span class="arrow">></span>
+        </div>
+        <div class="article" onclick="location.href='nktg-ai-profile-management.html'">
+            <span>Managing your profile</span> <span class="arrow">></span>
+        </div>
+        <div class="article" onclick="location.href='nktg-ai-account.html'">
+            <span>Managing your account</span> <span class="arrow">></span>
+        </div>
+        <div class="article" onclick="location.href='nktg-ai-plan.html'">
+            <span>Managing your plan</span> <span class="arrow">></span>
+        </div>
+        <div class="article" onclick="location.href='nktg-ai-plus.html'">
+            <span>What is NKTg AI Plus?</span> <span class="arrow">></span>
+        </div>
+        <div class="article" onclick="location.href='nktg-ai-pro.html'">
+            <span>What is NKTg AI Pro?</span> <span class="arrow">></span>
+        </div>
+        <div class="article" onclick="location.href='nktg-ai-language.html'">
+            <span>Changing the interface language</span> <span class="arrow">></span>
+        </div>
+        <div class="article" onclick="location.href='nktg-ai-contact.html'">
+            <span>Contacting support</span> <span class="arrow">></span>
+        </div>
+        <div class="article" onclick="location.href='nktg-ai-limitations.html'">
+            <span>Limitations to keep in mind</span> <span class="arrow">></span>
+        </div>
+        <div class="article" onclick="location.href='nktg-ai-algorithm.html'">
+            <span>What is NKTg AI's algorithm built on?</span> <span class="arrow">></span>
+        </div>
+        <div class="article" onclick="location.href='nktg-ai-privacy.html'">
+            <span>Privacy and how NKTg AI handles data</span> <span class="arrow">></span>
+        </div>
+    </div>
+
+    <script>
+        const searchBox = document.querySelector('.search-box');
+        const articles = document.querySelectorAll('.article');
+        searchBox.addEventListener('input', function() {
+            const term = searchBox.value.toLowerCase();
+            articles.forEach(article => {
+                const title = article.querySelector('span').textContent.toLowerCase();
+                if (title.includes(term)) {
+                    article.style.display = 'flex';
+                } else {
+                    article.style.display = 'none';
+                }
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Using NKTg AI in Government &amp; Public Administration</title>
+    <link rel="icon" type="image/png" href="logo_NKTgAI.png">
+    <style>
+
+        :root { --nktg-dark: #2c3e50; --nktg-link: #007bff; }
+        * { box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            margin: 0;
+            padding: 20px;
+            background: #f9f9f9;
+        }
+        .page {
+            max-width: 800px;
+            margin: 0 auto;
+            background: #fff;
+            padding: 28px 32px;
+            border-radius: 12px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.06);
+        }
+        .back-link {
+            display: inline-block;
+            margin-bottom: 20px;
+            text-decoration: none;
+            color: var(--nktg-link);
+            font-weight: bold;
+            font-size: 15px;
+        }
+        h1 { color: var(--nktg-dark); font-size: 26px; margin-top: 0; line-height: 1.3; }
+        h2 { color: var(--nktg-link); font-size: 20px; margin-top: 30px; border-bottom: 1px solid #eee; padding-bottom: 6px; line-height: 1.3; }
+        h3 { color: var(--nktg-dark); font-size: 17px; margin-top: 22px; }
+        p, li { font-size: 16px; }
+        ul, ol { margin-left: 20px; padding-left: 4px; }
+        pre {
+            background: #f4f4f4;
+            padding: 14px;
+            border-radius: 6px;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+            overflow-x: auto;
+            font-size: 14px;
+        }
+        table { width: 100%; border-collapse: collapse; margin: 16px 0; display: block; overflow-x: auto; white-space: nowrap; }
+        th, td { border: 1px solid #ddd; padding: 10px 12px; text-align: left; }
+        th { background: #f4f4f4; }
+        .example, .quote-box { background: #f9f9f9; padding: 14px 16px; border-left: 4px solid var(--nktg-dark); margin: 16px 0; font-style: normal; }
+        .divider { margin: 22px 0; border-top: 1px solid #eee; }
+
+        @media (max-width: 600px) {
+            body { padding: 10px; }
+            .page { padding: 18px 16px; border-radius: 8px; }
+            h1 { font-size: 21px; }
+            h2 { font-size: 17px; margin-top: 24px; }
+            h3 { font-size: 16px; }
+            p, li { font-size: 15px; }
+            table, th, td { font-size: 13px; }
+            th, td { padding: 8px; }
+            pre { font-size: 13px; padding: 10px; }
+        }
+    </style>
+</head>
+<body>
+<div class="nktg-lang-switcher" id="nktgLangSwitcher">
+    <button type="button" class="nktg-lang-btn" onclick="document.getElementById('nktgLangMenu').classList.toggle('open')">
+        <span>🌐</span><span id="nktgLangLabel">Language</span>
+    </button>
+    <div class="nktg-lang-menu" id="nktgLangMenu"></div>
+</div>
+<style>
+.nktg-lang-switcher{position:fixed;top:14px;right:14px;z-index:1000;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;}
+.nktg-lang-btn{display:flex;align-items:center;gap:6px;background:#fff;border:1px solid #ddd;border-radius:20px;padding:7px 14px;font-size:14px;color:#333;cursor:pointer;box-shadow:0 2px 6px rgba(0,0,0,0.08);}
+.nktg-lang-btn:hover{background:#f5f5f5;}
+.nktg-lang-menu{display:none;position:absolute;top:calc(100% + 6px);right:0;background:#fff;border:1px solid #eee;border-radius:10px;box-shadow:0 4px 16px rgba(0,0,0,0.12);min-width:160px;overflow:hidden;}
+.nktg-lang-menu.open{display:block;}
+.nktg-lang-menu a{display:block;padding:10px 16px;font-size:14px;color:#333;text-decoration:none;}
+.nktg-lang-menu a:hover{background:#f0f7ff;}
+.nktg-lang-menu a.active{color:#007bff;font-weight:bold;}
+@media (max-width:600px){.nktg-lang-switcher{top:8px;right:8px;}.nktg-lang-btn{padding:6px 10px;font-size:13px;}}
+</style>
+<script>
+(function(){
+    var LANGS = [
+        {code:'vi', label:'Tiếng Việt'},
+        {code:'en', label:'English'},
+        {code:'fr', label:'Français'},
+        {code:'de', label:'Deutsch'},
+        {code:'es', label:'Español'},
+        {code:'zh', label:'中文'},
+        {code:'ja', label:'日本語'},
+        {code:'ru', label:'Русский'}
+    ];
+    var parts = location.pathname.split('/').filter(Boolean);
+    var filename = 'index.html';
+    var curLang = parts[0] || 'vi';
+    if (parts.length > 0 && parts[parts.length-1].indexOf('.html') !== -1) {
+        filename = parts[parts.length-1];
+    }
+    var known = LANGS.map(function(l){ return l.code; });
+    if (known.indexOf(curLang) === -1) curLang = 'vi';
+
+    var labelEl = document.getElementById('nktgLangLabel');
+    var menuEl = document.getElementById('nktgLangMenu');
+    var curObj = LANGS.filter(function(l){ return l.code === curLang; })[0] || LANGS[0];
+    if (labelEl) labelEl.textContent = curObj.label;
+
+    var html = '';
+    LANGS.forEach(function(l){
+        var cls = (l.code === curLang) ? 'active' : '';
+        html += '<a class="' + cls + '" href="/' + l.code + '/' + filename + '">' + l.label + '</a>';
+    });
+    if (menuEl) menuEl.innerHTML = html;
+
+    document.addEventListener('click', function(e){
+        var switcher = document.getElementById('nktgLangSwitcher');
+        if (switcher && !switcher.contains(e.target)) {
+            menuEl.classList.remove('open');
+        }
+    });
+})();
+</script>
+    <div class="page">
+        <a href="index.html" class="back-link">← Back to home</a>
+<h1>Using NKTg AI in Government &amp; Public Administration</h1>
+  <p><strong>Quickly extract decisions, directives, responsibilities, and deadlines from administrative documents</strong></p>
+  <p>
+    Every day, government agencies, administrative units, and public organizations must process a large volume of documents such as decisions, directives, official letters, notices, plans, reports, and regulations.
+    These documents often contain many legal citations, references, explanations, and implementation content.
+  </p>
+  <p>NKTg AI helps decode the language structure of a document so users can quickly identify the most important information before reading the whole thing.</p>
+
+  <div class="divider"></div>
+
+  <h2>Step 1: Observe the AMP and DAMP scores</h2>
+  <p>Right after analyzing a document, NKTg AI displays the AMP and DAMP ratio. Just by looking at these two metrics, users already know how to approach the document.</p>
+
+  <div class="divider"></div>
+
+  <h2>Case 1: AMP &gt; 55%</h2>
+  <p>When AMP is greater than 55%, the document belongs to the <strong>AMP (Amplifying Text)</strong> group.</p>
+  <ul>
+    <li>Decisions</li>
+    <li>Directives</li>
+    <li>Task assignments</li>
+    <li>Assigned responsibilities</li>
+    <li>Implementation targets</li>
+    <li>Completion deadlines</li>
+  </ul>
+  <p>These are typically: decisions, directives, telegrams, directive official letters, implementation plans, and conclusion notices.</p>
+
+  <h3>How to use it</h3>
+  <p>In this case, read the <strong>Core Content</strong> first.</p>
+  <div class="example">
+    <p><strong>Example:</strong></p>
+    <p>"The Provincial People's Committee assigns the Department of Construction to lead the urban infrastructure renovation project, to be completed before December 31, with monthly progress reports."</p>
+  </div>
+
+  <div class="divider"></div>
+
+  <h2>Case 2: DAMP &gt; 55%</h2>
+  <p>When DAMP is greater than 55%, the document belongs to the <strong>DAMP (Damping Text)</strong> group.</p>
+  <ul>
+    <li>Legal grounds</li>
+    <li>Explanations</li>
+    <li>Evaluation</li>
+    <li>Applicable conditions</li>
+    <li>Exceptions</li>
+    <li>Situation analysis</li>
+    <li>Risks</li>
+  </ul>
+  <p>These are typically: consolidated reports, evaluation reports, submissions, thematic reports, and policy analysis reports.</p>
+
+  <h3>How to use it</h3>
+  <p>Don't expect a single prominent Core Content like in AMP documents. Users should read the conditions, grounds, and analysis in full before drawing conclusions or issuing a decision.</p>
+
+  <div class="divider"></div>
+
+  <h2>Case 3: AMP ≈ DAMP (STABLE)</h2>
+  <p>When AMP and DAMP are close to each other, the document belongs to the <strong>STABLE (Stable Text)</strong> group.</p>
+  <ul>
+    <li>Business processes</li>
+    <li>Working regulations</li>
+    <li>Internal rules</li>
+    <li>Implementation guides</li>
+    <li>Technical standards</li>
+    <li>Lists of administrative procedures</li>
+    <li>Professional guidance documents</li>
+  </ul>
+
+  <h3>How to use it</h3>
+  <p>In the STABLE state, NKTg AI may conclude there's no dominant Core Content. Users should read section by section or chapter by chapter, referencing the part relevant to the task at hand.</p>
+
+  <div class="divider"></div>
+
+  <h2>Suitable document types</h2>
+  <ul>
+    <li>Decisions</li>
+    <li>Directives</li>
+    <li>Official letters</li>
+    <li>Telegrams</li>
+    <li>Notices</li>
+    <li>Plans</li>
+    <li>Reports</li>
+    <li>Regulations</li>
+    <li>Business processes</li>
+    <li>Professional guidance</li>
+    <li>Lists of administrative procedures</li>
+  </ul>
+
+  <div class="divider"></div>
+
+  <h2>Value for officials and administrative agencies</h2>
+  <p>NKTg AI helps users quickly know:</p>
+  <ul>
+    <li>Whether the document leans toward implementation or analysis</li>
+    <li>Whether a prominent Core Content exists</li>
+    <li>The most important decision</li>
+    <li>The responsible unit</li>
+    <li>The task to be carried out</li>
+    <li>The completion deadline</li>
+    <li>Conditions or grounds that require special attention</li>
+  </ul>
+
+  <div class="divider"></div>
+
+  <h2>Conclusion</h2>
+  <p>
+    In Government and Public Administration, NKTg AI does not replace reading and studying a document.
+    The system helps users decide how to approach a document from the very first seconds, using the AMP, DAMP, and STABLE metrics.
+  </p>
+  <ul>
+    <li>When AMP &gt; 55% → prioritize reading the Core Content to immediately grasp the decision, directive, responsibility, and deadline.</li>
+    <li>When DAMP &gt; 55% → focus on the grounds, conditions, and analysis.</li>
+    <li>When AMP ≈ DAMP (STABLE) → read section by section or chapter by chapter, since information is evenly distributed.</li>
+  </ul>
+  <p>
+    By decoding language structure rather than interpreting content, NKTg AI helps officials, civil servants, and users of administrative documents quickly access the information they need while preserving the accuracy of the original document.
+  </p>
+    </div>
+</body>
+</html>

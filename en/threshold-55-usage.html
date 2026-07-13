@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>How to use NKTg AI's 55% threshold</title>
+    <link rel="icon" type="image/png" href="logo_NKTgAI.png">
+    <style>
+
+        :root { --nktg-dark: #2c3e50; --nktg-link: #007bff; }
+        * { box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            margin: 0;
+            padding: 20px;
+            background: #f9f9f9;
+        }
+        .page {
+            max-width: 800px;
+            margin: 0 auto;
+            background: #fff;
+            padding: 28px 32px;
+            border-radius: 12px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.06);
+        }
+        .back-link {
+            display: inline-block;
+            margin-bottom: 20px;
+            text-decoration: none;
+            color: var(--nktg-link);
+            font-weight: bold;
+            font-size: 15px;
+        }
+        h1 { color: var(--nktg-dark); font-size: 26px; margin-top: 0; line-height: 1.3; }
+        h2 { color: var(--nktg-link); font-size: 20px; margin-top: 30px; border-bottom: 1px solid #eee; padding-bottom: 6px; line-height: 1.3; }
+        h3 { color: var(--nktg-dark); font-size: 17px; margin-top: 22px; }
+        p, li { font-size: 16px; }
+        ul, ol { margin-left: 20px; padding-left: 4px; }
+        pre {
+            background: #f4f4f4;
+            padding: 14px;
+            border-radius: 6px;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+            overflow-x: auto;
+            font-size: 14px;
+        }
+        table { width: 100%; border-collapse: collapse; margin: 16px 0; display: block; overflow-x: auto; white-space: nowrap; }
+        th, td { border: 1px solid #ddd; padding: 10px 12px; text-align: left; }
+        th { background: #f4f4f4; }
+        .example, .quote-box { background: #f9f9f9; padding: 14px 16px; border-left: 4px solid var(--nktg-dark); margin: 16px 0; font-style: normal; }
+        .divider { margin: 22px 0; border-top: 1px solid #eee; }
+
+        @media (max-width: 600px) {
+            body { padding: 10px; }
+            .page { padding: 18px 16px; border-radius: 8px; }
+            h1 { font-size: 21px; }
+            h2 { font-size: 17px; margin-top: 24px; }
+            h3 { font-size: 16px; }
+            p, li { font-size: 15px; }
+            table, th, td { font-size: 13px; }
+            th, td { padding: 8px; }
+            pre { font-size: 13px; padding: 10px; }
+        }
+    </style>
+</head>
+<body>
+<div class="nktg-lang-switcher" id="nktgLangSwitcher">
+    <button type="button" class="nktg-lang-btn" onclick="document.getElementById('nktgLangMenu').classList.toggle('open')">
+        <span>🌐</span><span id="nktgLangLabel">Language</span>
+    </button>
+    <div class="nktg-lang-menu" id="nktgLangMenu"></div>
+</div>
+<style>
+.nktg-lang-switcher{position:fixed;top:14px;right:14px;z-index:1000;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;}
+.nktg-lang-btn{display:flex;align-items:center;gap:6px;background:#fff;border:1px solid #ddd;border-radius:20px;padding:7px 14px;font-size:14px;color:#333;cursor:pointer;box-shadow:0 2px 6px rgba(0,0,0,0.08);}
+.nktg-lang-btn:hover{background:#f5f5f5;}
+.nktg-lang-menu{display:none;position:absolute;top:calc(100% + 6px);right:0;background:#fff;border:1px solid #eee;border-radius:10px;box-shadow:0 4px 16px rgba(0,0,0,0.12);min-width:160px;overflow:hidden;}
+.nktg-lang-menu.open{display:block;}
+.nktg-lang-menu a{display:block;padding:10px 16px;font-size:14px;color:#333;text-decoration:none;}
+.nktg-lang-menu a:hover{background:#f0f7ff;}
+.nktg-lang-menu a.active{color:#007bff;font-weight:bold;}
+@media (max-width:600px){.nktg-lang-switcher{top:8px;right:8px;}.nktg-lang-btn{padding:6px 10px;font-size:13px;}}
+</style>
+<script>
+(function(){
+    var LANGS = [
+        {code:'vi', label:'Tiếng Việt'},
+        {code:'en', label:'English'},
+        {code:'fr', label:'Français'},
+        {code:'de', label:'Deutsch'},
+        {code:'es', label:'Español'},
+        {code:'zh', label:'中文'},
+        {code:'ja', label:'日本語'},
+        {code:'ru', label:'Русский'}
+    ];
+    var parts = location.pathname.split('/').filter(Boolean);
+    var filename = 'index.html';
+    var curLang = parts[0] || 'vi';
+    if (parts.length > 0 && parts[parts.length-1].indexOf('.html') !== -1) {
+        filename = parts[parts.length-1];
+    }
+    var known = LANGS.map(function(l){ return l.code; });
+    if (known.indexOf(curLang) === -1) curLang = 'vi';
+
+    var labelEl = document.getElementById('nktgLangLabel');
+    var menuEl = document.getElementById('nktgLangMenu');
+    var curObj = LANGS.filter(function(l){ return l.code === curLang; })[0] || LANGS[0];
+    if (labelEl) labelEl.textContent = curObj.label;
+
+    var html = '';
+    LANGS.forEach(function(l){
+        var cls = (l.code === curLang) ? 'active' : '';
+        html += '<a class="' + cls + '" href="/' + l.code + '/' + filename + '">' + l.label + '</a>';
+    });
+    if (menuEl) menuEl.innerHTML = html;
+
+    document.addEventListener('click', function(e){
+        var switcher = document.getElementById('nktgLangSwitcher');
+        if (switcher && !switcher.contains(e.target)) {
+            menuEl.classList.remove('open');
+        }
+    });
+})();
+</script>
+    <div class="page">
+        <a href="index.html" class="back-link">← Back to home</a>
+<h1>How to use NKTg AI's 55% threshold</h1>
+
+  <h2>Just by looking at AMP and DAMP, you'll know how to read a document</h2>
+  <p>
+    Two of NKTg AI's most important metrics are <strong>AMP%</strong> and <strong>DAMP%</strong>.
+  </p>
+  <p>
+    Instead of reading the entire text to judge its content yourself, you only need to look at these two metrics to know whether the text leans toward action or toward analysis. That helps you choose the right way to read and saves significant time.
+  </p>
+  <p><strong>NKTg AI's classification threshold is 55%.</strong></p>
+
+  <div class="divider"></div>
+
+  <h2>Case 1: AMP &gt; 55%</h2>
+  <p>When AMP is greater than 55%, the text belongs to the <strong>AMP (Amplifying Text)</strong> group.</p>
+  <p>This indicates that semantic energy is concentrated on sentences containing execution, decisions, or concrete outcomes.</p>
+  <p>These are typically documents such as:</p>
+  <ul>
+    <li>Implementation plans</li>
+    <li>Work reports</li>
+    <li>Task assignment records</li>
+    <li>Executive decisions</li>
+    <li>Internal notices</li>
+    <li>Business plans</li>
+  </ul>
+
+  <h3>How to read effectively</h3>
+  <p>For this type of text, read the <strong>Core Content</strong> first. Usually a single sentence already tells you:</p>
+  <ul>
+    <li>Who is responsible</li>
+    <li>What must be done</li>
+    <li>The target to reach</li>
+    <li>The desired outcome</li>
+    <li>The deadline</li>
+  </ul>
+  <p>Then, if you need more detail, continue reading the remaining sentences.</p>
+
+  <div class="divider"></div>
+
+  <h2>Case 2: DAMP &gt; 55%</h2>
+  <p>When DAMP is greater than 55%, the text belongs to the <strong>DAMP (Damping Text)</strong> group.</p>
+  <p>This indicates most of the semantic energy is concentrated on:</p>
+  <ul>
+    <li>conditions</li>
+    <li>context</li>
+    <li>explanation</li>
+    <li>analysis</li>
+    <li>risks</li>
+    <li>exceptions</li>
+    <li>counterarguments</li>
+  </ul>
+  <p>These are typically analytical reports, evaluation records, research reports, advisory materials, risk reports, and policy analysis documents.</p>
+
+  <h3>How to read effectively</h3>
+  <p>Don't expect a single prominent Core Content like in AMP text. Important information is usually distributed across many different sentences. If you need to make a decision, read the analysis sections rather than relying on a single sentence.</p>
+
+  <div class="divider"></div>
+
+  <h2>Case 3: AMP approximately equals DAMP</h2>
+  <p>When AMP and DAMP are close to each other, the text is classified as <strong>STABLE (Stable Text)</strong>.</p>
+  <p>This type of text is commonly found in:</p>
+  <ul>
+    <li>Technical documents</li>
+    <li>Operating procedures</li>
+    <li>User guides</li>
+    <li>Product descriptions</li>
+    <li>Standards documents</li>
+    <li>Training materials</li>
+  </ul>
+
+  <h3>How to read effectively</h3>
+  <p>Information is fairly evenly distributed across sentences. NKTg AI may conclude that <strong>no Core Content is dominant</strong>. Readers should view the text as a whole rather than focus on a single sentence.</p>
+
+  <div class="divider"></div>
+
+  <h2>Higher AMP is not always better</h2>
+  <p>AMP and DAMP do not reflect the quality of a text — they only reflect the <strong>semantic energy structure</strong> of the content.</p>
+  <p>For example:</p>
+  <ul>
+    <li>A good implementation plan usually has high AMP because its goal is to drive action.</li>
+    <li>A good risk assessment report may have high DAMP because its goal is analysis and warning.</li>
+    <li>A well-written technical document may be STABLE because its goal is to convey objective information.</li>
+  </ul>
+  <p>Therefore, no value is inherently "better." What matters is that the metric fits the purpose of the text.</p>
+
+  <div class="divider"></div>
+
+  <h2>Use the 55% threshold to decide how to read</h2>
+  <p>Before reading the details, look at NKTg AI's analysis result:</p>
+  <ul>
+    <li><strong>AMP &gt; 55%</strong> → Read the Core Content first to immediately grasp the key decision and action.</li>
+    <li><strong>DAMP &gt; 55%</strong> → Prepare to read the analysis section, since important information is spread across many sentences.</li>
+    <li><strong>AMP ≈ DAMP</strong> → Read section by section, since information is evenly distributed and a dominant Core Content may not exist.</li>
+  </ul>
+  <p>With just this 55% threshold, NKTg AI not only helps identify the type of text but also helps readers choose the right approach before diving into the full content.</p>
+    </div>
+</body>
+</html>

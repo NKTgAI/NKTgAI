@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>How do auditors and compliance officers use NKTg AI?</title>
+    <link rel="icon" type="image/png" href="logo_NKTgAI.png">
+    <style>
+
+        :root { --nktg-dark: #2c3e50; --nktg-link: #007bff; }
+        * { box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            margin: 0;
+            padding: 20px;
+            background: #f9f9f9;
+        }
+        .page {
+            max-width: 800px;
+            margin: 0 auto;
+            background: #fff;
+            padding: 28px 32px;
+            border-radius: 12px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.06);
+        }
+        .back-link {
+            display: inline-block;
+            margin-bottom: 20px;
+            text-decoration: none;
+            color: var(--nktg-link);
+            font-weight: bold;
+            font-size: 15px;
+        }
+        h1 { color: var(--nktg-dark); font-size: 26px; margin-top: 0; line-height: 1.3; }
+        h2 { color: var(--nktg-link); font-size: 20px; margin-top: 30px; border-bottom: 1px solid #eee; padding-bottom: 6px; line-height: 1.3; }
+        h3 { color: var(--nktg-dark); font-size: 17px; margin-top: 22px; }
+        p, li { font-size: 16px; }
+        ul, ol { margin-left: 20px; padding-left: 4px; }
+        pre {
+            background: #f4f4f4;
+            padding: 14px;
+            border-radius: 6px;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+            overflow-x: auto;
+            font-size: 14px;
+        }
+        table { width: 100%; border-collapse: collapse; margin: 16px 0; display: block; overflow-x: auto; white-space: nowrap; }
+        th, td { border: 1px solid #ddd; padding: 10px 12px; text-align: left; }
+        th { background: #f4f4f4; }
+        .example, .quote-box { background: #f9f9f9; padding: 14px 16px; border-left: 4px solid var(--nktg-dark); margin: 16px 0; font-style: normal; }
+        .divider { margin: 22px 0; border-top: 1px solid #eee; }
+
+        @media (max-width: 600px) {
+            body { padding: 10px; }
+            .page { padding: 18px 16px; border-radius: 8px; }
+            h1 { font-size: 21px; }
+            h2 { font-size: 17px; margin-top: 24px; }
+            h3 { font-size: 16px; }
+            p, li { font-size: 15px; }
+            table, th, td { font-size: 13px; }
+            th, td { padding: 8px; }
+            pre { font-size: 13px; padding: 10px; }
+        }
+    </style>
+</head>
+<body>
+<div class="nktg-lang-switcher" id="nktgLangSwitcher">
+    <button type="button" class="nktg-lang-btn" onclick="document.getElementById('nktgLangMenu').classList.toggle('open')">
+        <span>🌐</span><span id="nktgLangLabel">Language</span>
+    </button>
+    <div class="nktg-lang-menu" id="nktgLangMenu"></div>
+</div>
+<style>
+.nktg-lang-switcher{position:fixed;top:14px;right:14px;z-index:1000;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;}
+.nktg-lang-btn{display:flex;align-items:center;gap:6px;background:#fff;border:1px solid #ddd;border-radius:20px;padding:7px 14px;font-size:14px;color:#333;cursor:pointer;box-shadow:0 2px 6px rgba(0,0,0,0.08);}
+.nktg-lang-btn:hover{background:#f5f5f5;}
+.nktg-lang-menu{display:none;position:absolute;top:calc(100% + 6px);right:0;background:#fff;border:1px solid #eee;border-radius:10px;box-shadow:0 4px 16px rgba(0,0,0,0.12);min-width:160px;overflow:hidden;}
+.nktg-lang-menu.open{display:block;}
+.nktg-lang-menu a{display:block;padding:10px 16px;font-size:14px;color:#333;text-decoration:none;}
+.nktg-lang-menu a:hover{background:#f0f7ff;}
+.nktg-lang-menu a.active{color:#007bff;font-weight:bold;}
+@media (max-width:600px){.nktg-lang-switcher{top:8px;right:8px;}.nktg-lang-btn{padding:6px 10px;font-size:13px;}}
+</style>
+<script>
+(function(){
+    var LANGS = [
+        {code:'vi', label:'Tiếng Việt'},
+        {code:'en', label:'English'},
+        {code:'fr', label:'Français'},
+        {code:'de', label:'Deutsch'},
+        {code:'es', label:'Español'},
+        {code:'zh', label:'中文'},
+        {code:'ja', label:'日本語'},
+        {code:'ru', label:'Русский'}
+    ];
+    var parts = location.pathname.split('/').filter(Boolean);
+    var filename = 'index.html';
+    var curLang = parts[0] || 'vi';
+    if (parts.length > 0 && parts[parts.length-1].indexOf('.html') !== -1) {
+        filename = parts[parts.length-1];
+    }
+    var known = LANGS.map(function(l){ return l.code; });
+    if (known.indexOf(curLang) === -1) curLang = 'vi';
+
+    var labelEl = document.getElementById('nktgLangLabel');
+    var menuEl = document.getElementById('nktgLangMenu');
+    var curObj = LANGS.filter(function(l){ return l.code === curLang; })[0] || LANGS[0];
+    if (labelEl) labelEl.textContent = curObj.label;
+
+    var html = '';
+    LANGS.forEach(function(l){
+        var cls = (l.code === curLang) ? 'active' : '';
+        html += '<a class="' + cls + '" href="/' + l.code + '/' + filename + '">' + l.label + '</a>';
+    });
+    if (menuEl) menuEl.innerHTML = html;
+
+    document.addEventListener('click', function(e){
+        var switcher = document.getElementById('nktgLangSwitcher');
+        if (switcher && !switcher.contains(e.target)) {
+            menuEl.classList.remove('open');
+        }
+    });
+})();
+</script>
+    <div class="page">
+        <a href="index.html" class="back-link">← Back to home</a>
+<h1>How do auditors and compliance officers use NKTg AI?</h1>
+
+  <h2>Quickly detect obligations, exceptions, conditions, and warnings in internal control documents</h2>
+  <p>
+    In audit and compliance work, reading a document isn't just about understanding its content — it's also about spotting points that could create risk.
+    NKTg AI helps users decide how to approach a document from the start, so they can focus on the right areas to check.
+  </p>
+
+  <div class="divider"></div>
+
+  <h2>Scenario 1: Reviewing a new internal regulation</h2>
+  <p>Analysis result: <strong>AMP = 63%</strong>, indicating the document focuses on rules that must be implemented.</p>
+  <p>Read the <strong>Core Content</strong> first, which usually clearly identifies:</p>
+  <ul>
+    <li>Mandatory obligations</li>
+    <li>Each department's responsibilities</li>
+    <li>Processes that must be followed</li>
+    <li>The timing for implementation</li>
+    <li>Consequences of non-compliance</li>
+  </ul>
+
+  <div class="divider"></div>
+
+  <h2>Scenario 2: Evaluating an audit report or compliance document</h2>
+  <p>Analysis result: <strong>DAMP = 71%</strong>, showing the document focuses on:</p>
+  <ul>
+    <li>Applicable conditions</li>
+    <li>Exceptions</li>
+    <li>Points of non-compliance</li>
+    <li>Root-cause analysis</li>
+    <li>Control risk</li>
+    <li>Improvement recommendations</li>
+    <li>Warnings</li>
+  </ul>
+  <p>In this case, focus on the conditions, exceptions, and warnings, as these form the basis for evaluating the level of compliance.</p>
+
+  <div class="divider"></div>
+
+  <h2>Scenario 3: Looking up an internal control process</h2>
+  <p>Analysis result: <strong>AMP = 51%</strong>, <strong>DAMP = 49%</strong> → <strong>STABLE</strong> state.</p>
+  <p>The document is built to standardize a workflow, with no dominant Core Content. Users should check step by step through the control process.</p>
+
+  <div class="divider"></div>
+
+  <h2>How to use NKTg AI in audit work</h2>
+  <ul>
+    <li><strong>Step 1:</strong> Observe the AMP and DAMP scores.</li>
+    <li><strong>Step 2:</strong> Choose the right reading approach:
+      <ul>
+        <li>AMP &gt; 55% → Read the Core Content to identify obligations and responsibilities.</li>
+        <li>DAMP &gt; 55% → Focus on conditions, exceptions, warnings, and risk analysis.</li>
+        <li>AMP ≈ DAMP (STABLE) → Read process by process or section by section.</li>
+      </ul>
+    </li>
+    <li><strong>Step 3:</strong> Determine the scope of detailed review: obligations, conditions, exceptions, control points, or processes at risk of violation.</li>
+  </ul>
+
+  <div class="divider"></div>
+
+  <h2>Value of NKTg AI for audit and compliance</h2>
+  <p>NKTg AI does not replace an auditor's judgment, but helps you quickly access the most important information in the original document:</p>
+  <ul>
+    <li>In internal regulations: identify obligations and responsibilities.</li>
+    <li>In audit reports: identify conditions, exceptions, warnings, and risks.</li>
+    <li>In control processes: recognize the STABLE state and evaluate step by step.</li>
+  </ul>
+
+  <div class="divider"></div>
+
+  <h2>Conclusion</h2>
+  <p>
+    In Audit and Compliance, effectiveness comes from <strong>correctly identifying where risk and obligations that need checking reside</strong>.
+    NKTg AI helps auditors and compliance officers recognize a document's structure from the start using the AMP, DAMP, and STABLE metrics, helping them choose the right approach.
+  </p>
+    </div>
+</body>
+</html>
