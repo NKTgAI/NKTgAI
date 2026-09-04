@@ -192,3 +192,8 @@ Unlike the Local model, which runs directly via WebAssembly on the device, LLM C
 * **System Requirements & Getting Started**
 * **Hardware Requirements:** No high-end configuration required — just a device with a web browser and a stable internet connection.
 * **How to Start:** Go directly to nktg.org and select "NKTg AI – LLM Cloud" mode in the interface to start using it immediately, with no complex setup.
+
+
+## License
+
+* **Copyright © NKTg AI. All rights reserved.
