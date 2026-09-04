@@ -1,4 +1,4 @@
-# 📘 NKTg AI — Deterministic Language Decoding System
+# 📘 NKTg AI System
 
 NKTg AI is not a summarization tool. It is a specialized Language Decoding System that uses physical algorithms to measure semantic energy and extract the Core Content — the core logical genetic code of a text.
 
@@ -15,36 +15,6 @@ NKTg AI provides three distinct operational modes directly on the interface to m
 ### 1. NKTg AI (Standalone Core Mode)
 - **Core Function**: Focuses purely on deterministic semantic analysis, measuring semantic energy, structural decomposition, information layer decoding, and precise extraction of the Core Content without language-generation text rewriting.  
 - **Usage**: Ideal for raw semantic extraction, structural classification (AMP, DAMP, STABLE), and evaluating information against the 55% threshold.
-
-### 2. NKTg AI – LLM Local
-An integrated operational architecture that overcomes the limitations of traditional LLMs and optimizes information-processing performance in fields that require high accuracy.
-
-**Functional Separation Architecture**:  
-- NKTg AI (Logical & Quantitative Processing Brain): Measures semantic energy, performs structural decomposition, decodes information layers, and precisely extracts the Core Content using physical operators, completely eliminating subjective inference.  
-- LLM Local (Generative Interface): Converts the structure standardized by the NKTg AI "brain" into natural language, ensuring fluency and effective communication.
-
-**Advantages of Running LLM Local in the Browser via WebAssembly**:  
-- Absolute Data Security (Zero Data Leakage): The processing pipeline stays entirely on the user's device hardware.  
-- Minimal Latency: Responds instantly by leveraging local computing power directly through WebAssembly.  
-- Offline Operation: Maintains continuous, stable performance without an internet connection.  
-- Optimized Hardware Utilization: Executes code at near-native speed without complex software installation.  
-
-**System Requirements & Setup**:  
-Requires at least 16 GB of RAM, a 6-core or better CPU, and a WebGPU-capable GPU with roughly 6–8 GB of VRAM.  
-Go to [nktg.org](https://nktg.org) and select "NKTg AI – LLM Local" to download and load the model into your browser on first use.
-
-### 3. NKTg AI – LLM Cloud
-A completely free service that lets users leverage a cloud-based language model at no model cost (while standalone NKTg AI and LLM Local maintain their own separate policies).
-
-**Architecture & Flow**:  
-Source text → NKTg AI (Processing Brain & Structural Decoding) → LLM Cloud (Cloud Generative Interface) → Result.
-
-**Distinct Advantages**:  
-- No high-end device required  
-- Zero device load  
-- No model downloads into the browser  
-- Cross-device compatibility  
-- Requires a stable internet connection  
 
 ---
 
@@ -162,3 +132,33 @@ NKTg AI supports advanced semantic analysis and decision-making across multiple 
 - Credit Analysis: Analyzing audit reports and financial figures with absolute data integrity.  
 - Healthcare: Processing sensitive medical literature and records.  
 - Journalism: Extracting
+
+### 2. NKTg AI – LLM Local
+An integrated operational architecture that overcomes the limitations of traditional LLMs and optimizes information-processing performance in fields that require high accuracy.
+
+**Functional Separation Architecture**:  
+- NKTg AI (Logical & Quantitative Processing Brain): Measures semantic energy, performs structural decomposition, decodes information layers, and precisely extracts the Core Content using physical operators, completely eliminating subjective inference.  
+- LLM Local (Generative Interface): Converts the structure standardized by the NKTg AI "brain" into natural language, ensuring fluency and effective communication.
+
+**Advantages of Running LLM Local in the Browser via WebAssembly**:  
+- Absolute Data Security (Zero Data Leakage): The processing pipeline stays entirely on the user's device hardware.  
+- Minimal Latency: Responds instantly by leveraging local computing power directly through WebAssembly.  
+- Offline Operation: Maintains continuous, stable performance without an internet connection.  
+- Optimized Hardware Utilization: Executes code at near-native speed without complex software installation.  
+
+**System Requirements & Setup**:  
+Requires at least 16 GB of RAM, a 6-core or better CPU, and a WebGPU-capable GPU with roughly 6–8 GB of VRAM.  
+Go to [nktg.org](https://nktg.org) and select "NKTg AI – LLM Local" to download and load the model into your browser on first use.
+
+### 3. NKTg AI – LLM Cloud
+A completely free service that lets users leverage a cloud-based language model at no model cost (while standalone NKTg AI and LLM Local maintain their own separate policies).
+
+**Architecture & Flow**:  
+Source text → NKTg AI (Processing Brain & Structural Decoding) → LLM Cloud (Cloud Generative Interface) → Result.
+
+**Distinct Advantages**:  
+- No high-end device required  
+- Zero device load  
+- No model downloads into the browser  
+- Cross-device compatibility  
+- Requires a stable internet connection  
