@@ -196,4 +196,5 @@ Unlike the Local model, which runs directly via WebAssembly on the device, LLM C
 
 ## License
 
-* **Copyright © NKTg AI. All rights reserved.
+* Copyright © NKTg AI.
+* All rights reserved.
