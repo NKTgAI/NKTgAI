@@ -148,6 +148,7 @@ NKTg AI is officially distributed across multiple public source code hosting pla
 ├── nktg-ai-privacy.html                       # Privacy & Data Handling
 │
 └── README.md
+```
 
 ---
 
