@@ -12,7 +12,7 @@ It is an original sentence from the source text — not interpreted or altered b
 
 NKTg AI provides three distinct operational modes directly on the interface to match diverse use cases, processing depths, and hardware environments:
 
-## 1. NKTg AI (Standalone Core Mode)
+## 1. NKTg AI (Core Mode)
 - **Core Function**: Focuses purely on deterministic semantic analysis, measuring semantic energy, structural decomposition, information layer decoding, and precise extraction of the Core Content without language-generation text rewriting.  
 - **Usage**: Ideal for raw semantic extraction, structural classification (AMP, DAMP, STABLE), and evaluating information against the 55% threshold.
 
@@ -125,6 +125,7 @@ NKTg AI is officially distributed across multiple public source code hosting pla
 ---
 
 ### 📌 Applications & Use Cases
+
 NKTg AI supports advanced semantic analysis and decision-making across multiple domains:  
 - Business Management: Optimizing workflows and internal data processing.  
 - Legal Work: Handling binding clauses, contracts, and complex exception conditions.  
@@ -176,14 +177,21 @@ The system is fully capable of performing every task that today's large AI model
 We offer custom design and development of dedicated NKTg AI – LLM Local systems for businesses, companies, and organizations with specific needs. For details, please contact: contact@nktg.org.
 
 ## 3. NKTg AI – LLM Cloud
-A completely free service that lets users leverage a cloud-based language model at no model cost (while standalone NKTg AI and LLM Local maintain their own separate policies).
 
-**Architecture & Flow**:  
-Source text → NKTg AI (Processing Brain & Structural Decoding) → LLM Cloud (Cloud Generative Interface) → Result.
+NKTg AI – LLM Cloud is a completely free service that lets users use a cloud-based language model at no model cost (whereas the standalone NKTg AI product and NKTg AI – LLM Local apply their own separate pricing policies).
 
-**Distinct Advantages**:  
-- No high-end device required  
-- Zero device load  
-- No model downloads into the browser  
-- Cross-device compatibility  
-- Requires a stable internet connection  
+* **Architecture & Operating Flow**
+The system shares the same processing architecture as NKTg AI, with clearly defined roles between layers:
+Source text → NKTg AI (Processing Brain & Structural Decoding) → LLM Cloud (Cloud Generative Interface) → Result
+* **NKTg AI:** Handles logical processing, measures semantic energy, and decomposes and shapes the information structure before passing it on.
+* **LLM Cloud:** Receives the standardized structure to perform the language-generation task.
+* **Distinct Operating Advantages**
+Unlike the Local model, which runs directly via WebAssembly on the device, LLM Cloud mode offers clear hardware advantages:
+* **No high-end device required:** Users don't need a computer with powerful RAM, CPU, or GPU.
+* **Zero device load:** The entire heavy language-generation process runs entirely on cloud infrastructure.
+* **No model download into the browser:** Saves setup time — users can start right away without downloading or storing a local model.
+* **Cross-device compatibility:** Runs smoothly even on low-spec devices.
+* **Requires an internet connection:** Since the entire process runs on cloud servers, the device must maintain a stable internet connection.
+* **System Requirements & Getting Started**
+* **Hardware Requirements:** No high-end configuration required — just a device with a web browser and a stable internet connection.
+* **How to Start:** Go directly to nktg.org and select "NKTg AI – LLM Cloud" mode in the interface to start using it immediately, with no complex setup.
