@@ -134,21 +134,46 @@ NKTg AI supports advanced semantic analysis and decision-making across multiple 
 - Journalism: Extracting
 
 ## 2. NKTg AI – LLM Local
-An integrated operational architecture that overcomes the limitations of traditional LLMs and optimizes information-processing performance in fields that require high accuracy.
 
-**Functional Separation Architecture**:  
-- NKTg AI (Logical & Quantitative Processing Brain): Measures semantic energy, performs structural decomposition, decodes information layers, and precisely extracts the Core Content using physical operators, completely eliminating subjective inference.  
-- LLM Local (Generative Interface): Converts the structure standardized by the NKTg AI "brain" into natural language, ensuring fluency and effective communication.
+NKTg AI – LLM Local is an integrated operational architecture that overcomes the limitations of traditional LLMs and optimizes information-processing performance in fields that require high accuracy.
 
-**Advantages of Running LLM Local in the Browser via WebAssembly**:  
-- Absolute Data Security (Zero Data Leakage): The processing pipeline stays entirely on the user's device hardware.  
-- Minimal Latency: Responds instantly by leveraging local computing power directly through WebAssembly.  
-- Offline Operation: Maintains continuous, stable performance without an internet connection.  
-- Optimized Hardware Utilization: Executes code at near-native speed without complex software installation.  
-
-**System Requirements & Setup**:  
-Requires at least 16 GB of RAM, a 6-core or better CPU, and a WebGPU-capable GPU with roughly 6–8 GB of VRAM.  
-Go to [nktg.org](https://nktg.org) and select "NKTg AI – LLM Local" to download and load the model into your browser on first use.
+* **Functional Separation Architecture: Processing Brain and Execution Interface**
+In the NKTg AI – LLM Local architecture, the system clearly separates two independent functional layers to eliminate the drawbacks of monolithic language models:
+* **NKTg AI (Logical & Quantitative Processing Brain):** Handles the core processing role. Using physical operators, the system measures semantic energy, performs structural decomposition, decodes information layers, and precisely extracts the Core Content. This layer determines the authenticity of the data, eliminating subjective inference entirely.
+* **LLM Local (Generative Interface):** Converts the structure standardized by the NKTg AI "brain" into natural language. Rather than reasoning from raw data itself, this component performs text generation based on the already-shaped logical framework, ensuring fluency and effective communication with the user.
+* **Advantages of Running LLM Local in the Browser via WebAssembly**
+Integrating and running LLM Local directly in the web browser through WebAssembly technology delivers outstanding strategic value:
+* **Absolute Data Security (Zero Data Leakage):** The entire information-processing pipeline stays confined to the user's own device hardware, completely eliminating the risk of data leakage from transmission to external cloud servers.
+* **Minimal Latency (Low Latency):** By leveraging local computing power directly through WebAssembly, the model responds instantly, eliminating delays caused by internet transmission.
+* **Offline Operation:** The system maintains continuous, stable performance even when the device is completely disconnected from the internet.
+* **Optimized Hardware Utilization:** WebAssembly executes code at near-native speed directly in the browser, making the most of available computing power without requiring complex software installation.
+* **Decoding and Overcoming the Core Weaknesses of Traditional LLMs**
+The system is designed to eliminate the inherent weaknesses of standalone LLMs:
+* **Hallucination Mitigation:** Traditional LLMs rely on statistical probability to generate tokens, creating a risk of fabricating information. With the filtering layer from NKTg AI, LLM Local only receives verified data, ensuring responses stay grounded in the source material.
+* **Context Focus Optimization:** When processing complex text, NKTg AI isolates conditional/exceptional components (DAMP) from core actions (AMP), preventing information noise.
+* **Objective & Creative Synthesis:** Precisely preserves the user's original intent and information while optimizing the AI's fluent, creative expression. This eliminates any tendency to distort data, ensuring output that is both professionally deep (legal, technical, financial) and naturally fluent.
+* **Standard Operating Flow: Decode → Generate**
+Source text → NKTg AI (Processing Brain & Structural Decoding) → LLM Local in Browser (Generative Interface) → Accurate output
+* **Usage Guide and Real-World Applications**
+NKTg AI – LLM Local is designed with a friendly chat interface, allowing users to interact intuitively, just like using any mainstream large AI model.
+* **How Users Interact**
+* **Familiar Interface:** Users simply access the web interface, select the corresponding model mode on the toolbar, then type a question or request, or paste text directly into the chat box at the bottom of the screen, and press send.
+* **Seamless Experience:** The system automatically activates the underlying processing layers (NKTg AI decomposing structure and LLM Local generating language) without requiring the user to configure or intervene in the complex algorithms underneath.
+* **Supported Advanced Tasks**
+The system is fully capable of performing every task that today's large AI models offer, upgraded with superior reliability and tight control over the source data:
+* **In-depth document-based Q&A:** Retrieves and responds accurately to questions based on the provided data without fabricating information.
+* **Long-document analysis and research synthesis:** Processes large volumes of text, decomposing structure and logically condensing core content.
+* **Report writing and document drafting:** Automatically generates professional reports, technical documents, and contracts with fluent, accurate wording.
+* **Language translation:** Translates multilingual documents with high fidelity, preserving the author's original intent and structure.
+* **Handling complex domain-specific information:**
+* **Legal & Contracts:** Handles binding clauses and complex exception conditions.
+* **Finance & Governance:** Analyzes audit reports and market data that require absolute data integrity.
+* **Research & Education:** Synthesizes in-depth scientific material while preserving the author's original intent.
+* **System Requirements and First-Time Setup for NKTg AI Local**
+* **System Requirements:** For a stable NKTg AI Local experience, use a computer with at least 16 GB of RAM, a 6-core or better CPU, and a WebGPU-capable GPU with roughly 6–8 GB of video memory.
+* **First-Time Setup of NKTg AI Local:** On first use, go to nktg.org and select "NKTg AI – LLM Local" to download and load the model into your browser.
+* **Enterprise Solution Deployment Service**
+We offer custom design and development of dedicated NKTg AI – LLM Local systems for businesses, companies, and organizations with specific needs. For details, please contact: contact@nktg.org.
 
 ## 3. NKTg AI – LLM Cloud
 A completely free service that lets users leverage a cloud-based language model at no model cost (while standalone NKTg AI and LLM Local maintain their own separate policies).
