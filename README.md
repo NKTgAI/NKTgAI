@@ -1,8 +1,10 @@
 # 📘 NKTg AI — Deterministic Language Decoding System
 
-NKTg AI is a deterministic Language Decoding System that measures the semantic structure of text to identify its Core Content.  
-Unlike traditional AI summarization systems, NKTg AI does not generate new information or rewrite documents. Instead, it analyzes the internal semantic structure of a text and extracts the sentence that carries the highest semantic energy.  
-The system is designed for decision support across business, legal, finance, healthcare, journalism, education, scientific research, government, auditing, and project management.
+NKTg AI is not a summarization tool. It is a specialized Language Decoding System that uses physical algorithms to measure semantic energy and extract the Core Content — the core logical genetic code of a text.
+
+Core Content is the sentence with the highest density of executable actions and the most concrete outcome in a text. If removed, the text loses key information that cannot be inferred from the rest.
+
+It is an original sentence from the source text — not interpreted or altered by subjective reasoning.
 
 ---
 
