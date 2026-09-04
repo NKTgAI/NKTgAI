@@ -106,3 +106,54 @@ NKTg AI is officially distributed across multiple public source code hosting pla
 ---
 
 ## 📂 Project Structure
+├── index.html                                 # NKTg AI
+├── logo_NKTgAI.png                            # NKTg AI Logo
+│
+├── what-is-nktg-ai.html                       # What is NKTg AI?
+├── core-content-example.html                  # What is Core Content? A worked example
+├── amp-text-definition.html                   # AMP Text Definition
+├── damp-text-definition.html                  # DAMP Text Definition
+├── stable-text-definition.html                # STABLE Text Definition
+├── threshold-55-usage.html                    # How to use NKTg AI's 55% threshold
+│
+├── nktg-ai-extraction.html                    # How to use the Extraction feature
+├── nktg-ai-addition.html                      # How to use the Addition feature
+├── nktg-ai-algorithm.html                     # What is NKTg AI's algorithm built on?
+│
+├── nktg-ai-llm-local.html                     # NKTg AI – LLM Local Architecture & Guide
+├── nktg-ai-llm-cloud.html                     # NKTg AI – LLM Cloud Service
+│
+├── nktg-ai-applications.html                  # NKTg AI for Decision Support
+├── nktg-ai-business-management.html           # Using NKTg AI in Business Management
+├── nktg-ai-legal-application.html             # Using NKTg AI in Legal Work
+├── nktg-ai-government-administration.html     # Using NKTg AI in Government & Public Administration
+├── nktg-ai-credit-application.html            # Using NKTg AI in Credit Analysis
+├── nktg-ai-healthcare-application.html        # Using NKTg AI in Healthcare
+├── nktg-ai-journalism-application.html        # Using NKTg AI in Journalism
+├── nktg-ai-research-application.html          # Using NKTg AI in Research
+├── nktg-ai-education-application.html         # Using NKTg AI in Education
+├── nktg-ai-audit-compliance.html              # Using NKTg AI in Audit & Compliance
+├── nktg-ai-project-management.html            # Using NKTg AI in Project Management
+│
+├── nktg-ai-profile-management.html            # Managing Your Profile
+├── nktg-ai-account.html                       # Managing Your Account
+├── nktg-ai-plan.html                          # Managing Your Plan
+├── nktg-ai-plus.html                          # NKTg AI Plus
+├── nktg-ai-pro.html                           # NKTg AI Pro
+├── nktg-ai-language.html                      # Changing Interface Language
+├── nktg-ai-contact.html                       # Contact Support
+├── nktg-ai-limitations.html                   # Limitations to Keep in Mind
+├── nktg-ai-privacy.html                       # Privacy & Data Handling
+│
+└── README.md
+
+---
+
+## 📌 Applications & Use Cases
+NKTg AI supports advanced semantic analysis and decision-making across multiple domains:  
+- Business Management: Optimizing workflows and internal data processing.  
+- Legal Work: Handling binding clauses, contracts, and complex exception conditions.  
+- Government & Public Administration: Managing policies and administrative records reliably.  
+- Credit Analysis: Analyzing audit reports and financial figures with absolute data integrity.  
+- Healthcare: Processing sensitive medical literature and records.  
+- Journalism: Extracting
