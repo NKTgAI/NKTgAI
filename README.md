@@ -6,11 +6,8 @@ Core Content is the sentence with the highest density of executable actions and 
 
 It is an original sentence from the source text — not interpreted or altered by subjective reasoning.
 
----
+NKTg AI System provides three distinct operational modes directly on the interface to match diverse use cases, processing depths, and hardware environments.
 
-# ⚙️ Core Operational Modes
-
-NKTg AI provides three distinct operational modes directly on the interface to match diverse use cases, processing depths, and hardware environments:
 
 ## 1. NKTg AI (Core Mode)
 - **Core Function**: Focuses purely on deterministic semantic analysis, measuring semantic energy, structural decomposition, information layer decoding, and precise extraction of the Core Content without language-generation text rewriting.  
