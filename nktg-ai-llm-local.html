@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>What is NKTg AI – LLM Local?</title>
+    <link rel="icon" type="image/png" href="logo_NKTgAI.png">
+    <style>
+
+        :root { --nktg-dark: #2c3e50; --nktg-link: #007bff; }
+        * { box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            margin: 0;
+            padding: 20px;
+            background: #f9f9f9;
+        }
+        .page {
+            max-width: 800px;
+            margin: 0 auto;
+            background: #fff;
+            padding: 28px 32px;
+            border-radius: 12px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.06);
+        }
+        .back-link {
+            display: inline-block;
+            margin-bottom: 20px;
+            text-decoration: none;
+            color: var(--nktg-link);
+            font-weight: bold;
+            font-size: 15px;
+        }
+        h1 { color: var(--nktg-dark); font-size: 26px; margin-top: 0; line-height: 1.3; }
+        h2 { color: var(--nktg-link); font-size: 20px; margin-top: 30px; border-bottom: 1px solid #eee; padding-bottom: 6px; line-height: 1.3; }
+        h3 { color: var(--nktg-dark); font-size: 17px; margin-top: 22px; }
+        p, li { font-size: 16px; }
+        ul, ol { margin-left: 20px; padding-left: 4px; }
+        pre {
+            background: #f4f4f4;
+            padding: 14px;
+            border-radius: 6px;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+            overflow-x: auto;
+            font-size: 14px;
+        }
+        table { width: 100%; border-collapse: collapse; margin: 16px 0; display: block; overflow-x: auto; white-space: nowrap; }
+        th, td { border: 1px solid #ddd; padding: 10px 12px; text-align: left; }
+        th { background: #f4f4f4; }
+        .example, .quote-box { background: #f9f9f9; padding: 14px 16px; border-left: 4px solid var(--nktg-dark); margin: 16px 0; font-style: normal; }
+        .divider { margin: 22px 0; border-top: 1px solid #eee; }
+
+        @media (max-width: 600px) {
+            body { padding: 10px; }
+            .page { padding: 18px 16px; border-radius: 8px; }
+            h1 { font-size: 21px; }
+            h2 { font-size: 17px; margin-top: 24px; }
+            h3 { font-size: 16px; }
+            p, li { font-size: 15px; }
+            table, th, td { font-size: 13px; }
+            th, td { padding: 8px; }
+            pre { font-size: 13px; padding: 10px; }
+        }
+    </style>
+</head>
+<body>
+<div class="nktg-lang-switcher" id="nktgLangSwitcher">
+    <button type="button" class="nktg-lang-btn" onclick="document.getElementById('nktgLangMenu').classList.toggle('open')">
+        <span>🌐</span><span id="nktgLangLabel">Language</span>
+    </button>
+    <div class="nktg-lang-menu" id="nktgLangMenu"></div>
+</div>
+<style>
+.nktg-lang-switcher{position:fixed;top:14px;right:14px;z-index:1000;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;}
+.nktg-lang-btn{display:flex;align-items:center;gap:6px;background:#fff;border:1px solid #ddd;border-radius:20px;padding:7px 14px;font-size:14px;color:#333;cursor:pointer;box-shadow:0 2px 6px rgba(0,0,0,0.08);}
+.nktg-lang-btn:hover{background:#f5f5f5;}
+.nktg-lang-menu{display:none;position:absolute;top:calc(100% + 6px);right:0;background:#fff;border:1px solid #eee;border-radius:10px;box-shadow:0 4px 16px rgba(0,0,0,0.12);min-width:160px;overflow:hidden;}
+.nktg-lang-menu.open{display:block;}
+.nktg-lang-menu a{display:block;padding:10px 16px;font-size:14px;color:#333;text-decoration:none;}
+.nktg-lang-menu a:hover{background:#f0f7ff;}
+.nktg-lang-menu a.active{color:#007bff;font-weight:bold;}
+@media (max-width:600px){.nktg-lang-switcher{top:8px;right:8px;}.nktg-lang-btn{padding:6px 10px;font-size:13px;}}
+</style>
+<script>
+(function(){
+    var LANGS = [
+        {code:'vi', label:'Tiếng Việt'},
+        {code:'en', label:'English'},
+        {code:'fr', label:'Français'},
+        {code:'de', label:'Deutsch'},
+        {code:'es', label:'Español'},
+        {code:'zh', label:'中文'},
+        {code:'ja', label:'日本語'},
+        {code:'ru', label:'Русский'}
+    ];
+    var parts = location.pathname.split('/').filter(Boolean);
+    var filename = 'index.html';
+    var curLang = parts[0] || 'vi';
+    if (parts.length > 0 && parts[parts.length-1].indexOf('.html') !== -1) {
+        filename = parts[parts.length-1];
+    }
+    var known = LANGS.map(function(l){ return l.code; });
+    if (known.indexOf(curLang) === -1) curLang = 'vi';
+
+    var labelEl = document.getElementById('nktgLangLabel');
+    var menuEl = document.getElementById('nktgLangMenu');
+    var curObj = LANGS.filter(function(l){ return l.code === curLang; })[0] || LANGS[0];
+    if (labelEl) labelEl.textContent = curObj.label;
+
+    var html = '';
+    LANGS.forEach(function(l){
+        var cls = (l.code === curLang) ? 'active' : '';
+        html += '<a class="' + cls + '" href="/' + l.code + '/' + filename + '">' + l.label + '</a>';
+    });
+    if (menuEl) menuEl.innerHTML = html;
+
+    document.addEventListener('click', function(e){
+        var switcher = document.getElementById('nktgLangSwitcher');
+        if (switcher && !switcher.contains(e.target)) {
+            menuEl.classList.remove('open');
+        }
+    });
+})();
+</script>
+    <div class="page">
+        <a href="index.html" class="back-link">← Back to home</a>
+<h1>What is NKTg AI – LLM Local?</h1>
+  <p>
+    NKTg AI – LLM Local is an integrated operational architecture that overcomes the limitations of
+    traditional LLMs and optimizes information-processing performance in fields that require high
+    accuracy — running entirely in the browser via WebAssembly, with no server connection required.
+  </p>
+
+  <div class="divider"></div>
+
+  <h2>Functional separation architecture</h2>
+  <p>The system clearly separates two independent functional layers, eliminating the drawbacks of monolithic language models:</p>
+  <ul>
+    <li><strong>NKTg AI (Logical &amp; Quantitative Processing Brain):</strong> Handles the core processing role. Using physical operators, the system measures semantic energy, performs structural decomposition, decodes information layers, and precisely extracts the <em>Core Content</em>. This layer determines the authenticity of the data, eliminating subjective inference entirely.</li>
+    <li><strong>LLM Local (Generative Interface):</strong> Converts the structure standardized by the NKTg AI "brain" into natural language. Rather than reasoning from raw data itself, this component performs text generation based on the already-shaped logical framework, ensuring fluency and effective communication with the user.</li>
+  </ul>
+
+  <div class="divider"></div>
+
+  <h2>Operating flow: Decode → Generate</h2>
+  <pre>Source text → NKTg AI (Processing Brain &amp; Structural Decoding) → LLM Local in Browser (Generative Interface) → Accurate output</pre>
+
+  <div class="divider"></div>
+
+  <h2>Advantages of running in the browser via WebAssembly</h2>
+  <ul>
+    <li><strong>Absolute Data Security (Zero Data Leakage):</strong> The entire information-processing pipeline stays confined to the user's own device hardware, completely eliminating the risk of data leakage from transmission to external cloud servers.</li>
+    <li><strong>Minimal Latency (Low Latency):</strong> By leveraging local computing power directly through WebAssembly, the model responds instantly, eliminating delays caused by internet transmission.</li>
+    <li><strong>Offline Operation:</strong> The system maintains continuous, stable performance even when the device is completely disconnected from the internet.</li>
+    <li><strong>Optimized Hardware Utilization:</strong> WebAssembly executes code at near-native speed directly in the browser, making the most of available computing power without requiring complex software installation.</li>
+  </ul>
+
+  <div class="divider"></div>
+
+  <h2>Overcoming the core weaknesses of traditional LLMs</h2>
+  <ul>
+    <li><strong>Hallucination Mitigation:</strong> Traditional LLMs rely on statistical probability to generate tokens, creating a risk of fabricating information. With the filtering layer from NKTg AI, LLM Local only receives verified data, ensuring responses stay grounded in the source material.</li>
+    <li><strong>Context Focus Optimization:</strong> When processing complex text, NKTg AI isolates conditional/exceptional components (DAMP) from core actions (AMP), preventing information noise.</li>
+    <li><strong>Objective &amp; Creative Synthesis:</strong> Precisely preserves the user's original intent and information while optimizing the AI's fluent, creative expression.</li>
+  </ul>
+
+  <div class="divider"></div>
+
+  <h2>Supported tasks</h2>
+  <ul>
+    <li>In-depth document-based Q&amp;A — without fabricating information</li>
+    <li>Long-document analysis and research synthesis</li>
+    <li>Report writing, professional document drafting, contracts</li>
+    <li>Language translation, preserving original intent and structure</li>
+    <li>Domain-specific processing: legal &amp; contracts, finance &amp; governance, research &amp; education</li>
+  </ul>
+
+  <div class="divider"></div>
+
+  <h2>System requirements</h2>
+  <p>For a stable NKTg AI Local experience, use a computer with at least 16 GB of RAM, a 6-core or better CPU, and a WebGPU-capable GPU with roughly 6–8 GB of video memory.</p>
+
+  <div class="divider"></div>
+
+  <h2>How to get started</h2>
+  <ol>
+    <li>Go to <a href="https://nktg.org/">https://nktg.org/</a></li>
+    <li>Select "NKTg AI – LLM Local" mode on the toolbar</li>
+    <li>Wait for the system to download and load the model into your browser (one-time only)</li>
+    <li>Type a question or paste text into the input box and send</li>
+  </ol>
+
+  <div class="divider"></div>
+
+  <div class="quote-box">
+    <strong>Enterprise Solution Deployment Service</strong><br>
+    We offer custom design and development of dedicated NKTg AI – LLM Local systems for businesses, companies, and organizations with specific needs. For details, please contact: <strong>contact@nktg.org</strong>.
+  </div>
+    </div>
+</body>
+</html>
