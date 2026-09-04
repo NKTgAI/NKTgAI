@@ -8,24 +8,24 @@ It is an original sentence from the source text — not interpreted or altered b
 
 ---
 
-## ⚙️ Core Operational Modes
+# ⚙️ Core Operational Modes
 
 NKTg AI provides three distinct operational modes directly on the interface to match diverse use cases, processing depths, and hardware environments:
 
-### 1. NKTg AI (Standalone Core Mode)
+## 1. NKTg AI (Standalone Core Mode)
 - **Core Function**: Focuses purely on deterministic semantic analysis, measuring semantic energy, structural decomposition, information layer decoding, and precise extraction of the Core Content without language-generation text rewriting.  
 - **Usage**: Ideal for raw semantic extraction, structural classification (AMP, DAMP, STABLE), and evaluating information against the 55% threshold.
 
 ---
 
-## 🛡️ Decoding and Overcoming Core Weaknesses of Traditional LLMs
+### 🛡️ Decoding and Overcoming Core Weaknesses of Traditional LLMs
 - **Hallucination Mitigation**: Traditional LLMs rely on statistical probability, risking fabricated data. With NKTg AI's filtering layer, the generative interface only receives verified data.  
 - **Context Focus Optimization**: Isolates conditional/exceptional components (DAMP) from core actions (AMP) to prevent information noise.  
 - **Objective & Creative Synthesis**: Precisely preserves the user's original intent while delivering professional depth and natural fluency.  
 
 ---
 
-## 🔑 Core Concepts
+### 🔑 Core Concepts
 - Core Content — The sentence carrying the highest semantic energy.  
 - Semantic Energy — Measurement of semantic density within a document.  
 - AMP Text — Action-oriented semantic pattern.  
@@ -38,7 +38,7 @@ NKTg AI provides three distinct operational modes directly on the interface to m
 
 ---
 
-## ✨ Key Features
+### ✨ Key Features
 - Deterministic semantic analysis  
 - Core Content extraction  
 - AMP / DAMP / STABLE text classification  
@@ -52,13 +52,13 @@ NKTg AI provides three distinct operational modes directly on the interface to m
 
 ---
 
-## 📚 Official Resources
+### 📚 Official Resources
 - Official Website: https://nktg.org  
 - NKTg AI Help Center: https://help.nktg.org  
 
 ---
 
-## 📦 Repository Distribution
+### 📦 Repository Distribution
 NKTg AI is officially distributed across multiple public source code hosting platforms to improve availability, long-term preservation, redundancy, and global accessibility.
 
 | Platform      | Repository Link |
@@ -77,7 +77,7 @@ NKTg AI is officially distributed across multiple public source code hosting pla
 
 ---
 
-## 📂 Project Structure
+### 📂 Project Structure
 
 ```plaintext
 ├── index.html                                 # NKTg AI
@@ -124,7 +124,7 @@ NKTg AI is officially distributed across multiple public source code hosting pla
 
 ---
 
-## 📌 Applications & Use Cases
+### 📌 Applications & Use Cases
 NKTg AI supports advanced semantic analysis and decision-making across multiple domains:  
 - Business Management: Optimizing workflows and internal data processing.  
 - Legal Work: Handling binding clauses, contracts, and complex exception conditions.  
@@ -133,7 +133,7 @@ NKTg AI supports advanced semantic analysis and decision-making across multiple 
 - Healthcare: Processing sensitive medical literature and records.  
 - Journalism: Extracting
 
-### 2. NKTg AI – LLM Local
+## 2. NKTg AI – LLM Local
 An integrated operational architecture that overcomes the limitations of traditional LLMs and optimizes information-processing performance in fields that require high accuracy.
 
 **Functional Separation Architecture**:  
@@ -150,7 +150,7 @@ An integrated operational architecture that overcomes the limitations of traditi
 Requires at least 16 GB of RAM, a 6-core or better CPU, and a WebGPU-capable GPU with roughly 6–8 GB of VRAM.  
 Go to [nktg.org](https://nktg.org) and select "NKTg AI – LLM Local" to download and load the model into your browser on first use.
 
-### 3. NKTg AI – LLM Cloud
+## 3. NKTg AI – LLM Cloud
 A completely free service that lets users leverage a cloud-based language model at no model cost (while standalone NKTg AI and LLM Local maintain their own separate policies).
 
 **Architecture & Flow**:  
