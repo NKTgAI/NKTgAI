@@ -106,6 +106,8 @@ NKTg AI is officially distributed across multiple public source code hosting pla
 ---
 
 ## 📂 Project Structure
+
+.
 ├── index.html                                 # NKTg AI
 ├── logo_NKTgAI.png                            # NKTg AI Logo
 │
