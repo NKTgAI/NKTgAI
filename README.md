@@ -71,6 +71,7 @@ NKTg AI is officially distributed across multiple public source code hosting pla
 | RocketGit     | https://rocketgit.com/NKTgAI/NKTgAI |
 | Framagit      | https://framagit.org/NKTgAI/NKTgAI |
 | Disroot Git   | https://git.disroot.org/NKTgAI/NKTgAI |
+| Github        | https://github.com/NKTgAI/NKTgAI |
 
 ---
 
